@@ -21,16 +21,16 @@ header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .brand .name{font-weight:900;font-size:18px}
 .brand .sub{font-size:12px;color:var(--muted);margin-top:4px}
 
-/* language toggle */
-.lang-toggle{margin-left:auto;display:flex;gap:8px;z-index:6000}
-.lang-btn{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:800}
-.lang-btn.active{background:linear-gradient(90deg,var(--accent),#6df0c8);color:#022426}
+/* language dropdown */
+.lang-select{margin-left:auto}
+select#langSelect{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));color:var(--txt);font-weight:800;cursor:pointer}
 
 /* card */
 .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:14px;padding:12px;box-shadow:0 24px 60px rgba(2,8,18,0.6);position:relative}
 .title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .product-name{font-weight:900;font-size:18px}
-.product-size{color:var(--muted);font-size:13px}
+.product-size{color:var(--muted);font-size:13px;margin-top:6px}
+.price-badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#ffd36b,#ff9f6b);color:#081217;font-weight:900;margin-left:8px;box-shadow:0 10px 30px rgba(255,160,100,0.12)}
 
 /* carousel */
 .carousel{position:relative;border-radius:12px;overflow:hidden;background:#000;margin-bottom:12px}
@@ -93,9 +93,12 @@ footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
         <div class="sub">TV • Electronics • Showroom</div>
       </div>
 
-      <div class="lang-toggle" style="margin-left:auto">
-        <button id="langEn" class="lang-btn active">English</button>
-        <button id="langGu" class="lang-btn">ગુજરાતી</button>
+      <div class="lang-select">
+        <label for="langSelect" style="display:none">Language</label>
+        <select id="langSelect" title="Select language">
+          <option value="en">English</option>
+          <option value="gu">ગુજરાતી</option>
+        </select>
       </div>
     </header>
 
@@ -103,7 +106,7 @@ footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
       <div class="title-row">
         <div>
           <div id="prodTitle" class="product-name">TCL 43" P6K 4K HDR TV — 43P6K</div>
-          <div id="prodSize" class="product-size">43 inch (109 cm) • ₹35,000</div>
+          <div id="prodSize" class="product-size">43 inch (109 cm) • <span class="price-badge">₹35,000</span></div>
         </div>
       </div>
 
@@ -178,11 +181,11 @@ document.addEventListener('DOMContentLoaded', function () {
     next();
   }
 
-  // --- load logo (tries a few common names) ---
-  const logoCandidates = ['assets/ktpl-new-logo.jpg','assets/ktpl new logo.jpg','assets/ktpl-new-logo.png','assets/ktpl new logo.png','assets/ktpl-new-logo.webp'];
+  // --- load logo (tries common names) ---
+  const logoCandidates = ['assets/ktpl-new-logo.jpg','assets/ktpl new logo.jpg','assets/ktpl-new-logo.png','assets/ktpl new logo.png','assets/ktpl-new-logo.webp','assets/ktpl-new-logo.jpeg'];
   tryLoadVariants(logoCandidates, document.getElementById('mainLogo'));
 
-  // --- gallery images you provided (plus variants without spaces/dashes) ---
+  // --- gallery images (variants) ---
   const galleryNames = ['back4.webp','back5.webp','fron.webp','front2.webp','front3.webp','more screen.webp','side1.webp','side2.webp','top.webp'];
   function makeVariants(name){
     const ext = name.match(/\.[^/.]+$/) ? name.match(/\.[^/.]+$/)[0] : '';
@@ -192,7 +195,6 @@ document.addEventListener('DOMContentLoaded', function () {
     variants.push('assets/' + base.replace(/\s+/g,'') + ext);
     variants.push('assets/' + base.replace(/\s+/g,'-') + ext);
     variants.push('assets/' + base.replace(/\s+/g,'_') + ext);
-    // fallback without given extension (script adds exts)
     variants.push('assets/' + base);
     return variants;
   }
@@ -204,9 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
     slidesEl.appendChild(img);
     const v = makeVariants(n);
     tryLoadVariants(v, img);
-    // record final candidate paths (will be actual src after load) for lightbox navigation
     galleryList.push(img);
-    // click to open lightbox
     img.addEventListener('click', ()=> openLightbox(galleryList.indexOf(img)));
   });
 
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('prevBtn').addEventListener('click', ()=>{ if(!slidesEl.children.length) return; idx = (idx-1+slidesEl.children.length)%slidesEl.children.length; updateSlide(); });
   document.getElementById('nextBtn').addEventListener('click', ()=>{ if(!slidesEl.children.length) return; idx = (idx+1)%slidesEl.children.length; updateSlide(); });
 
-  // simple swipe
+  // swipe
   (function(){ let startX=null; const c=document.getElementById('carousel'); c.addEventListener('touchstart', e=> startX=e.changedTouches[0].clientX, {passive:true}); c.addEventListener('touchend', e=>{ if(startX===null) return; const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>40){ if(dx<0) idx=Math.min(idx+1, slidesEl.children.length-1); else idx=Math.max(idx-1,0); updateSlide(); } startX=null; }, {passive:true}); })();
 
   setTimeout(()=>{ buildDots(); updateSlide(); }, 380);
@@ -243,12 +243,10 @@ document.addEventListener('DOMContentLoaded', function () {
     lbIndex = i;
     const imgEl = slidesEl.children[lbIndex];
     if(!imgEl) return;
-    // use the currently loaded src if present, else try to compute
-    const src = imgEl.src || imgEl.getAttribute('data-src') || imgEl.getAttribute('src');
+    const src = imgEl.src || imgEl.getAttribute('data-src') || imgEl.getAttribute('src') || '';
     lbImg.src = src;
     lb.style.display='flex'; lb.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
     zoomed = false; lbImg.style.transform = 'translate(0,0) scale(1)';
-    // show/hide prev/next based on gallery size
     lbPrev.style.display = (galleryList.length>1 ? 'block' : 'none');
     lbNext.style.display = (galleryList.length>1 ? 'block' : 'none');
     lbHint.style.display = 'block';
@@ -262,7 +260,6 @@ document.addEventListener('DOMContentLoaded', function () {
   lbNext.addEventListener('click', showNext);
   lb.addEventListener('click', (e)=> { if(e.target === lb || e.target === lbImg) closeLightbox(); });
 
-  // keyboard
   window.addEventListener('keydown', (e)=>{
     if(lb.style.display==='flex'){
       if(e.key === 'Escape') closeLightbox();
@@ -271,22 +268,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // double-tap to toggle zoom, and basic pinch handling
+  // double-tap & pinch zoom
   let lastTap = 0;
   let startDist = 0;
   let lastX=0, lastY=0;
   lbImg.addEventListener('touchstart', function(e){
     if(e.touches && e.touches.length === 2){
-      // pinch start
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
       startDist = Math.hypot(dx,dy);
     } else if(e.touches && e.touches.length === 1){
       const now = Date.now();
-      if(now - lastTap < 300){ // double tap
-        toggleZoom(e.touches[0].clientX, e.touches[0].clientY);
-        lastTap = 0;
-      } else lastTap = now;
+      if(now - lastTap < 300){ toggleZoom(e.touches[0].clientX, e.touches[0].clientY); lastTap = 0; } else lastTap = now;
       lastX = e.touches[0].clientX; lastY = e.touches[0].clientY;
     }
   }, {passive:true});
@@ -302,13 +295,11 @@ document.addEventListener('DOMContentLoaded', function () {
         zoomed = scale > 1.05;
       }
     } else if(e.touches && e.touches.length === 1 && zoomed){
-      // simple pan while zoomed
       e.preventDefault();
       const nx = e.touches[0].clientX;
       const ny = e.touches[0].clientY;
       const dx = nx - lastX;
       const dy = ny - lastY;
-      // compute small translate by reading current transform
       const cur = lbImg.style.transform || 'translate(0,0) scale(1)';
       const m = cur.match(/translate\((-?\d+)px,(-?\d+)px\)/);
       let tx = 0, ty = 0;
@@ -320,33 +311,22 @@ document.addEventListener('DOMContentLoaded', function () {
   }, {passive:false});
 
   lbImg.addEventListener('touchend', function(e){ startDist = 0; });
-
-  function toggleZoom(x,y){
-    if(!zoomed){
-      lbImg.style.transform = 'translate(0,0) scale(2)';
-      zoomed = true;
-    } else {
-      lbImg.style.transform = 'translate(0,0) scale(1)';
-      zoomed = false;
-    }
-  }
-
-  // desktop double click
   lbImg.addEventListener('dblclick', ()=> toggleZoom());
+  function toggleZoom(){ if(!zoomed){ lbImg.style.transform = 'translate(0,0) scale(2)'; zoomed=true; } else { lbImg.style.transform = 'translate(0,0) scale(1)'; zoomed=false; } }
 
-  // --- chat / assistant code (EN + GU) ---
-  const langEn = document.getElementById('langEn'), langGu = document.getElementById('langGu');
+  // --- chat assistant code (EN + GU) ---
+  const langSelect = document.getElementById('langSelect');
   let lang = 'en';
-  langEn.addEventListener('click', ()=>{ lang='en'; langEn.classList.add('active'); langGu.classList.remove('active'); document.getElementById('panelSub').textContent='Tap mic or type your question'; });
-  langGu.addEventListener('click', ()=>{ lang='gu'; langGu.classList.add('active'); langEn.classList.remove('active'); document.getElementById('panelSub').textContent='માઇક દબાવો અથવા لکھો'; });
+  langSelect.addEventListener('change', ()=> {
+    lang = langSelect.value || 'en';
+    document.getElementById('panelSub').textContent = (lang === 'en' ? 'Tap mic or type your question' : 'માઇક દબાવો અથવા લખો');
+  });
 
   const panel = document.getElementById('panel');
   const messagesEl = document.getElementById('messages');
   const inputBox = document.getElementById('inputBox');
   const sendBtn = document.getElementById('sendBtn');
   const micBtn = document.getElementById('micBtn');
-  const listeningBanner = document.getElementById('listeningBanner');
-  const listeningText = document.getElementById('listeningText');
 
   function openPanel(){ panel.style.display='flex'; panel.setAttribute('aria-hidden','false'); setTimeout(()=> { inputBox.focus(); scrollMessagesToBottom(); }, 120); }
   function closePanel(){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); deactivateListeningUI(); }
@@ -360,23 +340,30 @@ document.addEventListener('DOMContentLoaded', function () {
     messagesEl.appendChild(el); scrollMessagesToBottom();
   }
 
-  // improved prompts and Gujarati answers
+  // ---------- expanded prompts (TV-focused) ----------
   const PROMPTS = [
-    { q:/(\bprice\b|\bcost\b|₹|rupee|દામ|કિંમત|કિંમતો)/i, en:'The 43-inch TCL P6K is priced at ₹35,000 in our showroom (approx).', gu:'આ 43\" TCL P6K ટીવીનો અંદાજિત ભાવ ₹35,000 છે.' },
-    { q:/(\bdimension|dimensions|size|height|width|depth|માપ|ઊંચાઈ|પહોળાઈ|ઊંડાઈ)/i, en:'Typical dimensions (with stand) are approx W 83.8 cm × H 60.4 cm × D 18.45 cm.', gu:'સ્ટૅન્ડ સાથે માપ લગભગ: પહોળાઈ 83.8 સેમી × ઊંચાઈ 60.4 સેમી × ઊંડાઈ 18.45 સેમી.' },
-    { q:/(\bfeature|features|spec|specs|વિશેષતા|લક્ષણ|ફીચર)/i, en:'Key features: 4K UHD, HDR10, Google TV, AiPQ processor, Dolby Audio, HDMI 2.1.', gu:'મુખ્ય લક્ષણો: 4K UHD, HDR10, Google TV, AiPQ પ્રોસેસર, Dolby Audio અને HDMI 2.1.' },
-    { q:/(\bcolor|colour|available color|available colours|રંગ)/i, en:'This model commonly comes in a black/graphite finish; exact colors depend on stock.', gu:'આ મોડલ સામાન્ય રીતે કાળા/ગ્રોફાઇટ રંગમાં મળે છે; ચોક્કસ રંગ સ્ટોક પર આધાર રાખે છે.' },
-    { q:/(\bgame|gaming|input lag|ગેમ|ગેમિંગ)/i, en:'Yes — HDMI 2.1, Game Mode and ALLM reduce input lag. Native refresh is 60Hz.', gu:'હા — HDMI 2.1 અને ગેમ મોડ ઇનપુટ લેગ ઘટાડે છે. મૂળ રિફ્રેશ રેટ 60Hz છે.' },
-    { q:/(\bfeedback|review|customer|પ્રતિસાદ|સમીક્ષા)/i, en:'Customers praise the 4K clarity and value; some note moderate peak brightness.', gu:'ગ્રાહકો સામાન્ય રીતે 4K સ્પષ્ટતા અને કિંમતની પ્રશંસા કરે છે; કેટલાકે પીક બ્રાઇટનેસ ની ટિપ્પણી કરી છે.' },
-    { q:/(\bpower|watt|consumption|વોટ|વીજ)/i, en:'Typical power usage ~70–110W; standby <0.5W.', gu:'સામાન્ય વીજ ઉપભાવ આશરે 70–110W છે; સ્ટેન્ડબાય <0.5W.' },
-    { q:/(\bhdr|dolby|hdr10|દોલ્બી)/i, en:'Supports HDR10 and Dolby Audio (Dolby Vision not supported).', gu:'આ મોડલ HDR10 અને Dolby Audio સપોર્ટ કરે છે (Dolby Vision ઉપલબ્ધ નથી).' },
-    { q:/(\brefresh|hz|60hz|120hz|રિફ્રેશ)/i, en:'Native refresh is 60Hz; MEMC helps motion.', gu:'મૂળ રિફ્રેશ 60Hz છે; MEMC મોશનને સુધારે છે.' },
-     { q:/\b(warranty|guarantee|વોરંટી|વોરંટી)/i, en:'This model usually includes 1 year manufacturer warranty. In-store policies may vary.', gu:'આ મોડલ સામાન્ય રીતે 1 વર્ષનું મેન્યુફેક્ચરર વોરંટી સાથે આવે છે. સ્ટોરની નીતિઓ બદલાઈ શકે છે.' }    
+    { q:/(\bprice\b|\bcost\b|₹|rupee|દામ|કિંમત|કિંમતો)/i, en:'The 43-inch TCL P6K is priced at ₹35,000 in our showroom (approx). EMI & exchange options available in store.', gu:'આ 43\" TCL P6K ટીવીનો અંદાજિત ભાવ ₹35,000 છે. EMI અને એક્સચેન્જ વિકલ્પો સ્ટોર પર ઉપલબ્ધ છે.' },
+    { q:/(\bdimension|dimensions|size|height|width|depth|માપ|ઊંચાઈ|પહોળાઈ|ઊંડાઈ)/i, en:'Typical dimensions (with stand): W 83.8 cm × H 60.4 cm × D 18.45 cm. Wall-mount VESA pattern varies by model.', gu:'સ્ટૅન્ડ સાથે માપ આશરે: પહોળાઈ 83.8 સેમી × ઊંચાઈ 60.4 સેમી × ઊંડાઇ 18.45 સેમી. VESA પેટર્ન મોડેલ મુજબ બદલાય શકે છે.' },
+    { q:/(\bfeature|features|spec|specs|વિશેષતા|લક્ષણ|ફીચર)/i, en:'Key features: 4K UHD, HDR10, Google TV, AiPQ processor, Dolby Audio, HDMI 2.1, MEMC for motion handling.', gu:'મુખ્ય લક્ષણો: 4K UHD, HDR10, Google TV, AiPQ પ્રોસેસર, Dolby Audio, HDMI 2.1 અને MEMC.' },
+    { q:/(\badvantage|advantages|benefit|why buy|કારણ|લાબ)/i, en:'Advantages: strong value for money, vivid 4K HDR colors, AiPQ upscaling, decent audio with Dolby, and Google TV platform for apps & casting.', gu:'લાભ: કિંમતે ઉત્તમ મૂલ્ય, જ્વલંત 4K HDR રંગો, AiPQ અપસ્કેલિંગ, સારો ઓડિયો અને Google TV પ્લેટફોર્મ.' },
+    { q:/(\bwhy buy.*smaller|\bwhy choose.*smaller|\bchoose.*smaller|why buy this instead of a smaller)/i, en:'Choose 43\" for a noticeably larger, more cinematic viewing area — better for living rooms and group viewing compared to smaller sizes.', gu:'43\" પસંદ કરવાથી મોટા અને વધુ સિનેમેટિક જોવા માટેスク્રીન મળે છે — લિવિંગ રૂમ અને જૂથ જોવા માટે વધુ સારો.' },
+    { q:/(\bbetter than other brands|how is it better|compare|compare with|બીજા બ્રાન્ડ)/i, en:'Compared to competitors in the same price tier, this model offers good upscaling (AiPQ), HDR10 support and Google TV — good value vs many other brands.', gu:'સમાન કિંમતી શ્રેણીમાં આ મોડેલ સારી અપસ્કેલિંગ (AiPQ), HDR10 અને Google TV આપે છે — ઘણા બ્રાન્ડની સામે સારી કિંમત.' },
+    { q:/(\bmode|modes|movie mode|game mode|quick|eco|smart|apps|wifi|internet|voice)/i, en:'Display & smart: Movie, Game and Standard modes; Game Mode + ALLM reduces input lag. Google TV provides Play Store apps and Chromecast built-in.', gu:'ડિસ્પ્લે અને સ્માર્ટ: Movie, Game અને Standard મોડ; Game Mode અને ALLM ઇનપુટ લેગ ઘટાડે છે. Google TV પર Play Store અને Chromecast બિલ્ટ-ઇન છે.' },
+    { q:/(\bbright room|sunlight|outdoor|brightness|daylight|contrast|screen)/i, en:'This panel performs well in normal indoor lighting; for very bright rooms a high-brightness model or anti-glare placement is recommended.', gu:'સામાન્ય ઇંડોર લાઇટિંગમાં સારું પ્રદર્શન. ખૂબ તેજ રૂમ માટે વધુ બ્રાઇટનેસ અથવા એન્ટી-ગ્લેર સેટઅપ ભલામણ છે.' },
+    { q:/(\bport|ports|hdmi|usb|ethernet|audio out|hdmi 2.1)/i, en:'Includes multiple HDMI ports (HDMI 2.1 on at least one port), USB, audio out and Ethernet — exact count depends on the variant, check sticker or manual.', gu:'ઘણા HDMI (ઘટમાં એક HDMI 2.1), USB, audio out અને Ethernet હોય છે — ચોક્કસ સંખ્યા મોડેલ અનુસાર બદલાય છે.' },
+    { q:/(\bsound|audio|dolby|dolby audio|dolby atmos)/i, en:'Audio: Supports Dolby Audio for clearer sound. For immersive bass or louder volumes, consider a soundbar or external speaker.', gu:'ઓડિયો: Dolby Audio સપોર્ટ; વધુ બાસ માટે સાઉન્ડબાર સૂચવીએ છીએ.' },
+    { q:/(\bwifi|wi-?fi|wireless|google tv|smart tv|apps|play store)/i, en:'Smart features: Google TV with Wi-Fi and built-in Chromecast for casting. Login with Google account to access Play Store apps.', gu:'સ્માર્ટ ફીચર્સ: Google TV, Wi-Fi અને બિલ્ટ-ઇન Chromecast. Google એકાઉન્ટથી Play Store એપ્સ મેળવી શકો છો.' },
+    { q:/(\bwarranty|guarantee|service|વોરંટી|સર્વિસ)/i, en:'Usually comes with 1 year manufacturer warranty; extended warranty options may be offered in store.', gu:'સામાન્ય રીતે 1 વર્ષનું મેન્યુફેક્ચરર વોરંટી મળે છે; સ્ટોરમાં વધારાની વોરંટી ઉપલબ્ધ હોઈ શકે છે.' },
+    { q:/(\bpower|watt|consumption|energy|વોટ|વીજ)/i, en:'Typical power usage ~70–110W while operating; standby consumption is very low (<0.5W). Exact numbers vary by brightness and settings.', gu:'સામાન્ય વીજ ઉપભોગ ~70–110W; સ્ટેન્ડબાય <0.5W. ચોક્કસ આંકડા સેટિંગ્સ પ્રમાણે બદલાય છે.' },
+    { q:/(\bwall|wall-mount|mount|vesa|વોલ)/i, en:'Yes, the TV supports wall-mounting; check the VESA pattern on the back or in manual and buy a compatible bracket.', gu:'હા, વોલ-માઉન્ટ સપોર્ટ છે; VESA પેટર્ન ચકાસો અને યોગ્ય બ્રેકેટ ખરીદો.' },
+    { q:/(\breview|reviews|rating|customer feedback|પ્રતિસાદ|સમીક્ષા)/i, en:'Common customer feedback: good picture quality for price, reliable Google TV experience; some users mention moderate peak brightness in very bright rooms.', gu:'ગ્રાહકો કહે છે: કિંમત માટે સારી પિક્ચર ક્વાલિટી અને વિશ્વસનીય Google TV; કેટલાકે ખૂબ તેજ રૂમમાં પીક બ્રાઇટનેસ નોંધ્યું.' },
+    { q:/(\bcolor|colour|available color|રંગ)/i, en:'Usually available in black/graphite finish; color availability depends on retailer stock and region.', gu:'સામાન્ય રીતે કાળા/ગ્રોફાઇટ ફિનિશમાં મળે છે; રંગ સ્ટોક પર નિર્ભર છે.' },
+    { q:/.*/, en:'Sorry — please ask about price, dimensions, features, display, ports, power or warranty.', gu:'માફ કરશો — કૃપા કરીને કિંમત, માપ, લક્ષણો, ડિસ્પ્લે અથવા વોરંટી વિશે પૂછો.' }
   ];
 
   function findAnswer(text){
-    for(const p of PROMPTS) if(p.q.test(text)) return (lang === 'en'? p.en : p.gu);
-    return (lang === 'en' ? "Sorry — please ask about price, dimensions, features, colors, gaming, power or HDR." : "માફ કરશો — કૃપા કરીને कीमत, માપ અથવા લક્ષણો વિશે પુછી જુઓ.");
+    for(const p of PROMPTS) if(p.q.test(text)) return (lang === 'en' ? p.en : p.gu);
+    return (lang === 'en' ? PROMPTS[PROMPTS.length-1].en : PROMPTS[PROMPTS.length-1].gu);
   }
 
   // send events
@@ -392,8 +379,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // speech recognition & banner
   let recognition = null, listening=false;
-  function activateListeningUI(){ listeningBanner.style.display='flex'; listeningBanner.classList.add('active'); listeningText.textContent = (lang==='en'?'Listening...':'સુનાઈ રહ્યું છે...'); document.getElementById('panelSub').textContent = listeningText.textContent; }
-  function deactivateListeningUI(){ listeningBanner.classList.remove('active'); listeningBanner.style.display='none'; document.getElementById('panelSub').textContent = (lang==='en'?'Tap mic or type your question':'માઇક દબાવો અથવા લખો'); }
+  function activateListeningUI(){ document.getElementById('listeningBanner').style.display='flex'; document.getElementById('listeningBanner').classList.add('active'); document.getElementById('listeningText').textContent = (lang==='en'?'Listening...':'સુનાઈ રહ્યું છે...'); document.getElementById('panelSub').textContent = document.getElementById('listeningText').textContent; }
+  function deactivateListeningUI(){ document.getElementById('listeningBanner').classList.remove('active'); document.getElementById('listeningBanner').style.display='none'; document.getElementById('panelSub').textContent = (lang==='en'?'Tap mic or type your question':'માઇક દબાવો અથવા લખો'); }
 
   if(window.SpeechRecognition || window.webkitSpeechRecognition){
     recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
@@ -413,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   micBtn.addEventListener('click', function(){
     if(!recognition){ alert(lang==='en' ? 'Speech recognition not supported in this browser.' : 'આ બ્રાઉઝર માં સ્પીચ રેકોગ્નિશન સપોર્ટ નથી.'); return; }
-    if(!listening){ try{ recognition.lang = (lang==='en' ? 'en-IN' : 'gu-IN'); recognition.start(); }catch(e){} }
+    if(!listening){ try{ recognition.lang = (lang === 'en' ? 'en-IN' : 'gu-IN'); recognition.start(); }catch(e){} }
     else { try{ recognition.stop(); }catch(e){} }
   });
 
@@ -428,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }catch(e){}
   }
 
-  // keyboard handling (visualViewport fallback)
+  // keyboard handling
   function scrollMessagesToBottom(){ try{ messagesEl.scrollTop = messagesEl.scrollHeight; }catch(e){} }
   const panelEl = document.getElementById('panel');
   if(window.visualViewport){
@@ -438,8 +425,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const dh = window.innerHeight - vh;
       if(vh < lastH - 50) panelEl.style.transform = `translateY(-${dh}px)`;
       else panelEl.style.transform = '';
-      lastH = vh;
-      setTimeout(scrollMessagesToBottom,200);
+      lastH = vh; setTimeout(scrollMessagesToBottom,200);
     });
     inputBox.addEventListener('focus', ()=> setTimeout(()=> { panelEl.style.transform=''; scrollMessagesToBottom(); },200));
   } else {
@@ -456,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function () {
   setTimeout(()=> pushMessage(lang==='en' ? 'Hello — tap Product Assistant for voice or Ask Me to type a question.' : 'હેલો — અવાજ માટે Product Assistant દબાવો અથવા લખવા માટે Ask Me દબાવો.'), 450);
 
   // ensure touchscreen behaviour
-  ['prevBtn','nextBtn','askBtn','assistBtn','langEn','langGu','micBtn','sendBtn'].forEach(id=>{ const el = document.getElementById(id); if(el) el.style.touchAction='manipulation'; });
+  ['prevBtn','nextBtn','askBtn','assistBtn','langSelect','micBtn','sendBtn'].forEach(id=>{ const el = document.getElementById(id); if(el) el.style.touchAction='manipulation'; });
 
 }); // DOM load
 </script>

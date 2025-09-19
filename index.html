@@ -3,90 +3,110 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Kalindi — TCL 43&quot; P6K 4K HDR TV (43P6K)</title>
+<title>Kalindi — TCL 43" P6K 4K HDR TV (43P6K)</title>
 <link rel="icon" href="assets/ktpl-new-logo.png">
 <style>
+  /* Theme: deep twilight + electric cyan + warm accent */
   :root{
-    --bg-1:#051026; --bg-2:#071424; --muted:#9fb0c4;
-    --accent1:#ff6b6b; --accent2:#ffd166; --text:#e9f7ff;
-    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+    --bg1:#031026;
+    --bg2:#071428;
+    --card:#071726;
+    --muted:#9fb0c4;
+    --accent1:#00e6d8; /* electric cyan */
+    --accent2:#ff8a65; /* warm coral */
+    --glass: rgba(255,255,255,0.03);
+    --text:#e9f8ff;
+    --soft-shadow: 0 16px 50px rgba(2,8,18,0.7);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
   }
+
   html,body{height:100%;margin:0;background:
-    radial-gradient(700px 360px at 12% 8%, rgba(255,107,107,0.03), transparent 8%),
-    linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--text); -webkit-font-smoothing:antialiased;}
+    radial-gradient(700px 360px at 12% 8%, rgba(0,230,216,0.02), transparent 8%),
+    linear-gradient(180deg,var(--bg1),var(--bg2)); color:var(--text); -webkit-font-smoothing:antialiased;}
 
   .wrap{max-width:980px;margin:18px auto;padding:18px}
 
   header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
-  .brand{display:flex;gap:16px;align-items:center}
-  .logo{width:92px;height:92px;border-radius:12px;overflow:hidden;background:#fff;padding:8px;box-shadow:0 14px 44px rgba(2,6,12,0.65)}
+  .brand{display:flex;gap:14px;align-items:center}
+  .logo{width:120px;height:120px;border-radius:16px;overflow:hidden;background:#fff;padding:10px;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
   .logo img{width:100%;height:100%;object-fit:contain}
-  .brand-name{font-weight:900;font-size:18px}
-  .brand-sub{color:var(--muted);font-size:12px;margin-top:4px}
+  .brand-info{line-height:1}
+  .brand-name{font-weight:900;font-size:20px}
+  .brand-sub{color:var(--muted);font-size:13px;margin-top:6px}
 
   .lang-toggle{display:flex;gap:10px}
   .lang{padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:800}
-  .lang.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061016;box-shadow:0 12px 40px rgba(255,107,107,0.06)}
+  .lang.active{background:linear-gradient(90deg,var(--accent1),#6df0c8);color:#022426;box-shadow:0 12px 40px rgba(0,230,216,0.06)}
 
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:16px;padding:14px;box-shadow:0 18px 50px rgba(2,8,18,0.7)}
+  /* main card */
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:18px;padding:14px;box-shadow:var(--soft-shadow)}
   .grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
   @media (max-width:900px){ .grid{grid-template-columns:1fr} }
 
-  .gallery{position:relative;border-radius:12px;overflow:hidden;background:#041218}
+  /* gallery */
+  .gallery{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#071826,#041018)}
   .slides{display:flex;transition:transform .36s cubic-bezier(.2,.9,.2,1);touch-action:pan-y}
   .slides img{width:100%;height:420px;object-fit:cover;flex-shrink:0;cursor:zoom-in;transition:transform .28s ease}
-  @media (max-width:520px){ .slides img{height:260px} }
+  @media (max-width:520px){ .slides img{height:240px} }
 
   .dots{position:absolute;left:12px;bottom:12px;display:flex;gap:8px;z-index:12}
   .dot{width:10px;height:10px;border-radius:8px;background:rgba(255,255,255,0.06)}
   .dot.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));transform:scale(1.1)}
 
+  /* prev/next overlay */
+  .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(2,6,12,0.46);border-radius:10px;padding:10px;border:0;color:white;cursor:pointer;z-index:20}
+  .nav-btn:hover{background:rgba(2,6,12,0.7)}
+  .nav-prev{left:12px}
+  .nav-next{right:12px}
+
+  /* product meta */
   .meta{padding:10px 0}
   .product-title{font-weight:900;font-size:20px;margin-bottom:6px}
-  .price{font-weight:900;color:var(--accent2);display:inline-block;padding:6px 10px;border-radius:10px;background:linear-gradient(90deg, rgba(255,209,102,0.06), rgba(255,107,107,0.02));}
+  .price{display:inline-block;padding:8px 12px;border-radius:12px;background:linear-gradient(90deg, rgba(0,230,216,0.08), rgba(255,138,101,0.06));color:#021414;font-weight:900}
 
   .rating{color:var(--muted);font-size:13px;margin-top:6px}
 
-  .specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  .spec{background:rgba(255,255,255,0.02);padding:10px;border-radius:10px;font-size:13px;color:var(--text);min-width:120px}
-
-  .assistant{display:flex;gap:14px;align-items:center;margin-top:14px;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(255,107,107,0.04), rgba(255,209,102,0.02))}
-  .mic{width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:22px;color:#061016;cursor:pointer;border:0}
-  .mic.listening{transform:scale(1.05);box-shadow:0 24px 70px rgba(255,107,107,0.14)}
-
+  /* assistant */
+  .assistant{display:flex;gap:14px;align-items:center;margin-top:14px;padding:14px;border-radius:14px;background:linear-gradient(90deg, rgba(0,230,216,0.03), rgba(255,138,101,0.02));box-shadow:0 12px 36px rgba(2,8,18,0.45)}
+  .mic{width:68px;height:68px;border-radius:14px;background:linear-gradient(180deg,var(--accent1),#6df0c8);display:flex;align-items:center;justify-content:center;font-size:22px;color:#022426;cursor:pointer;border:0;box-shadow:0 10px 30px rgba(2,8,18,0.6)}
+  .mic.listening{transform:scale(1.06);box-shadow:0 28px 70px rgba(0,230,216,0.12);animation:micPulse 1200ms infinite}
+  @keyframes micPulse{0%{box-shadow:0 10px 30px rgba(0,230,216,0.04)}50%{box-shadow:0 28px 70px rgba(0,230,216,0.12)}100%{box-shadow:0 10px 30px rgba(0,230,216,0.04)}}
+  .assistant-info{flex:1}
   .assistant-title{font-weight:800}
   .assistant-sub{font-size:13px;color:var(--muted);margin-top:6px}
-  .transcript{margin-top:8px;color:var(--muted);font-size:14px;min-height:40px}
+  .transcript{margin-top:8px;color:var(--muted);font-size:14px;min-height:44px}
 
-  .chat{margin-top:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
-  .messages{max-height:220px;overflow:auto;display:flex;flex-direction:column;gap:8px;padding-right:6px}
-  .bubble{padding:10px 12px;border-radius:12px;max-width:80%;font-size:14px;line-height:1.35}
-  .bubble.user{align-self:flex-end;background:linear-gradient(90deg,var(--accent2),#ffb085);color:#061016}
-  .bubble.bot{align-self:flex-start;background:rgba(255,255,255,0.04);color:#e9f6fb}
-  .input-row{display:flex;gap:8px;align-items:center}
-  .input-row input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit;font-size:14px}
-  .btn-send{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061016;cursor:pointer}
-  .btn-voice{padding:10px;border-radius:10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+  /* chat area */
+  .chat{margin-top:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px}
+  .messages{max-height:260px;overflow:auto;display:flex;flex-direction:column;gap:10px;padding-right:6px}
+  .bubble{padding:12px;border-radius:14px;max-width:78%;font-size:15px;line-height:1.4;word-break:break-word}
+  .bubble.user{align-self:flex-end;background:linear-gradient(90deg,var(--accent1),#ffb085);color:#022426}
+  .bubble.bot{align-self:flex-start;background:rgba(255,255,255,0.03);color:#e9f6fb}
+  /* ensure bubbles don't overflow on small screens */
+  .messages .bubble{box-shadow:0 6px 18px rgba(2,8,18,0.4)}
+  .input-row{display:flex;gap:8px;align-items:center;margin-top:6px}
+  .input-row input{flex:1;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:15px;outline:none}
+  .btn-send{padding:10px 14px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#022426;cursor:pointer;font-weight:800}
+  .btn-voice{padding:10px;border-radius:12px;border:0;background:transparent;color:var(--muted);cursor:pointer}
 
-  /* details area: only images (no text) */
-  .details{margin-top:20px;display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+  /* features image area (below) */
+  .details{margin-top:22px;display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
   @media (max-width:900px){ .details{grid-template-columns:1fr} }
-  .desc-panel{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+  .desc-panel{background:linear-gradient(180deg, rgba(255,255,255,0.005), rgba(255,255,255,0.002));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
   .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:6px}
-  .feature-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;cursor:zoom-in;transition:transform .5s ease,opacity .5s ease}
+  .feature-grid img{width:100%;height:160px;object-fit:cover;border-radius:10px;cursor:zoom-in;box-shadow:0 12px 36px rgba(2,8,18,0.5);transform:translateY(18px);opacity:0;transition:transform .6s ease,opacity .6s ease}
   .feature-grid img.revealed{transform:none;opacity:1}
-  .feature-grid img{transform:translateY(18px);opacity:0}
 
   .side-images{display:flex;flex-direction:column;gap:10px}
   .side-images img{width:100%;height:140px;object-fit:cover;border-radius:10px}
 
-  /* lightbox: fit-to-screen initial behavior */
+  /* lightbox */
   .lightbox{position:fixed;inset:0;background:rgba(2,6,12,0.92);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .24s ease}
   .lightbox.show{opacity:1;pointer-events:auto}
   .lightbox img{max-width:94%;max-height:94%;object-fit:contain;cursor:grab;transition:transform .12s ease}
   .closeBtn{position:fixed;top:16px;right:16px;background:rgba(255,255,255,0.06);border-radius:10px;padding:8px 10px;border:0;color:var(--text);cursor:pointer;z-index:10000}
 
-  footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+  footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center}
 </style>
 </head>
 <body>
@@ -94,7 +114,7 @@
     <header>
       <div class="brand">
         <div class="logo"><img id="logo" src="assets/ktpl-new-logo.png" alt="Kalindi logo"></div>
-        <div>
+        <div class="brand-info">
           <div class="brand-name">Kalindi Tradelinks Pvt Ltd</div>
           <div class="brand-sub">TV • Electronics</div>
         </div>
@@ -110,15 +130,16 @@
       <div class="grid">
         <div>
           <div class="gallery" id="gallery" aria-label="Product images">
+            <button class="nav-btn nav-prev" id="prevBtn" aria-label="Previous image">◀</button>
             <div class="slides" id="slides"></div>
             <div class="dots" id="dots" aria-hidden="true"></div>
+            <button class="nav-btn nav-next" id="nextBtn" aria-label="Next image">▶</button>
           </div>
 
           <div class="meta">
             <div class="product-title" id="productTitle">TCL 43" P6K 4K HDR TV — 43P6K</div>
             <div class="rating" id="rating">4.6 ★ • 1 year warranty</div>
             <div style="margin-top:8px" class="price" id="price">₹35,000</div>
-            <div class="specs" id="specs"></div>
           </div>
 
           <div class="assistant" role="region" aria-label="Voice assistant">
@@ -148,9 +169,7 @@
       <section class="details" id="details">
         <div class="desc-panel">
           <div class="desc-title" style="font-weight:800">Product Images & Features</div>
-          <div class="feature-grid" id="featureGrid">
-            <!-- JS will insert images only (no text description) -->
-          </div>
+          <div class="feature-grid" id="featureGrid"></div>
         </div>
 
         <div>
@@ -167,7 +186,6 @@
           </div>
         </div>
       </section>
-
     </main>
 
     <footer>© Kalindi Tradelinks Pvt Ltd</footer>
@@ -181,73 +199,81 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // PRODUCT
   const PRODUCT = {
     id:'tcl-43p6k',
     title: 'TCL 43" P6K 4K HDR TV — 43P6K',
     price: '₹35,000',
     rating: '4.6 ★ • 1 year warranty',
     images: ['assets/wm1.jpg','assets/wm2.jpg','assets/wm3.jpg','assets/wm4.jpg','assets/wm5.jpg'],
-    specs: { Size:'43 inch', Resolution:'4K UHD', HDR:'HDR10', Smart:'Google TV' },
     featureImages: ['assets/description1.webp','assets/description2.webp','assets/front2.webp','assets/proccessor.webp','assets/back4.webp','assets/side1.webp']
   };
 
-  // Populate basic UI
+  // populate UI text
   document.getElementById('productTitle').textContent = PRODUCT.title;
   document.getElementById('price').textContent = PRODUCT.price;
   document.getElementById('rating').textContent = PRODUCT.rating;
-  const specsEl = document.getElementById('specs'); specsEl.innerHTML = '';
-  for(const [k,v] of Object.entries(PRODUCT.specs)){
-    const s = document.createElement('div'); s.className='spec'; s.innerHTML=`<strong>${k}</strong><div style="color:var(--muted);margin-top:6px">${v}</div>`; specsEl.appendChild(s);
-  }
 
-  // Side images
-  const sideImages = document.getElementById('sideImages'); sideImages.innerHTML='';
-  ['assets/front2.webp','assets/proccessor.webp','assets/side1.webp'].forEach(src=>{
-    const i=document.createElement('img'); i.src=src; i.alt='feature'; sideImages.appendChild(i);
+  // side images
+  const sideImages = document.getElementById('sideImages'); sideImages.innerHTML = '';
+  ['assets/front2.webp','assets/proccessor.webp','assets/side1.webp'].forEach(src => {
+    const i = document.createElement('img'); i.src = src; i.alt = 'feature'; sideImages.appendChild(i);
   });
 
-  // Slides build
+  // build slider + dots
   const slidesEl = document.getElementById('slides'), dotsEl = document.getElementById('dots');
   function buildSlides(){
     slidesEl.innerHTML=''; dotsEl.innerHTML='';
     PRODUCT.images.forEach((src,i)=>{
-      const img=document.createElement('img'); img.src=src; img.alt = PRODUCT.title + ' image ' + (i+1);
-      img.addEventListener('error', ()=>{ img.style.display='none'; });
+      const img = document.createElement('img'); img.src = src; img.alt = PRODUCT.title + ' ' + (i+1);
+      img.addEventListener('error', ()=> img.style.display='none');
       img.addEventListener('click', ()=> openLightbox(src));
       slidesEl.appendChild(img);
-      const d=document.createElement('div'); d.className = 'dot' + (i===0 ? ' active' : ''); d.addEventListener('click', ()=> { idx=i; updateSlide(); });
+
+      const d = document.createElement('div'); d.className = 'dot' + (i===0 ? ' active' : '');
+      d.addEventListener('click', ()=> { index = i; updateSlide(); });
       dotsEl.appendChild(d);
     });
   }
-  let idx=0;
-  function updateSlide(){ slidesEl.style.transform = `translateX(${-idx*100}%)`; Array.from(dotsEl.children).forEach((d,i)=> d.classList.toggle('active', i===idx)); }
+  let index = 0;
+  function updateSlide(){ slidesEl.style.transform = `translateX(${-index*100}%)`; Array.from(dotsEl.children).forEach((d,i)=>d.classList.toggle('active', i===index)); }
   buildSlides();
-  setInterval(()=> { if(slidesEl.children.length){ idx=(idx+1)%slidesEl.children.length; updateSlide(); } },4500);
+  let auto = setInterval(()=>{ if(slidesEl.children.length){ index=(index+1)%slidesEl.children.length; updateSlide(); } },4500);
 
-  // swipe
-  let startX=null; const gallery=document.getElementById('gallery');
+  // prev/next
+  document.getElementById('prevBtn').addEventListener('click', ()=>{ index = Math.max(0, index-1); updateSlide(); clearInterval(auto); auto = setInterval(()=>{ index=(index+1)%slidesEl.children.length; updateSlide(); },4500); });
+  document.getElementById('nextBtn').addEventListener('click', ()=>{ index = Math.min(slidesEl.children.length-1, index+1); updateSlide(); clearInterval(auto); auto = setInterval(()=>{ index=(index+1)%slidesEl.children.length; updateSlide(); },4500); });
+
+  // swipe support
+  let startX = null;
+  const gallery = document.getElementById('gallery');
   gallery.addEventListener('touchstart', e => startX = e.changedTouches[0].clientX);
   gallery.addEventListener('touchend', e => {
-    if(startX===null) return;
+    if(startX === null) return;
     const endX = e.changedTouches[0].clientX; const dx = endX - startX;
-    if(Math.abs(dx)>40){ if(dx<0) idx=Math.min(idx+1, slidesEl.children.length-1); else idx=Math.max(idx-1,0); updateSlide(); }
+    if(Math.abs(dx) > 40){
+      if(dx < 0) index = Math.min(index+1, slidesEl.children.length-1); else index = Math.max(index-1, 0);
+      updateSlide();
+    }
     startX = null;
   });
 
-  // Feature grid (images only)
-  const featureGrid = document.getElementById('featureGrid'); featureGrid.innerHTML='';
+  // feature grid
+  const featureGrid = document.getElementById('featureGrid');
   PRODUCT.featureImages.forEach(src=>{
-    const img=document.createElement('img'); img.src=src; img.alt='feature'; img.loading='lazy';
-    img.addEventListener('click', ()=> openLightbox(src)); featureGrid.appendChild(img);
+    const img = document.createElement('img'); img.src = src; img.alt = 'feature'; img.loading='lazy';
+    img.addEventListener('click', ()=> openLightbox(src));
+    featureGrid.appendChild(img);
   });
-
   // reveal on scroll
   const obs = new IntersectionObserver(entries=>{
-    entries.forEach(ent=>{ if(ent.isIntersecting){ ent.target.querySelectorAll('img').forEach(img=>img.classList.add('revealed')); }});
-  }, {threshold:0.22});
+    entries.forEach(ent=>{
+      if(ent.isIntersecting) ent.target.querySelectorAll('img').forEach(img=>img.classList.add('revealed'));
+    });
+  },{threshold:0.22});
   obs.observe(document.getElementById('details'));
 
-  // Lightbox (fit-to-screen initially)
+  // Lightbox (fit-to-screen initial)
   const lightbox = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'), lbClose = document.getElementById('lbClose');
   let isDragging=false, lastX=0, lastY=0, currentScale=1, translateX=0, translateY=0;
   function openLightbox(src){
@@ -256,11 +282,11 @@ document.addEventListener('DOMContentLoaded', () => {
     lbImg.style.transform = `translate(0px,0px) scale(1)`;
     lightbox.classList.add('show'); lightbox.setAttribute('aria-hidden','false');
   }
-  function closeLightbox(){ lightbox.classList.remove('show'); lightbox.setAttribute('aria-hidden','true'); lbImg.src=''; currentScale=1; translateX=0; translateY=0; }
+  function closeLightbox(){ lightbox.classList.remove('show'); lightbox.setAttribute('aria-hidden','true'); lbImg.src=''; }
   lbClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', (e)=> { if(e.target === lightbox) closeLightbox(); });
 
-  // Wheel zoom (desktop) - zoom around center; initial scale=1 ensures fit-to-screen
+  // wheel zoom
   lbImg.addEventListener('wheel', (e)=>{
     e.preventDefault();
     const delta = -e.deltaY * 0.0015;
@@ -268,116 +294,131 @@ document.addEventListener('DOMContentLoaded', () => {
     lbImg.style.transform = `translate(${translateX}px,${translateY}px) scale(${currentScale})`;
   }, {passive:false});
 
-  // Drag to pan
-  lbImg.addEventListener('mousedown', (e)=>{
-    isDragging = true; lastX = e.clientX; lastY = e.clientY; lbImg.style.cursor='grabbing';
-  });
+  // drag to pan
+  lbImg.addEventListener('mousedown', (e)=>{ isDragging=true; lastX=e.clientX; lastY=e.clientY; lbImg.style.cursor='grabbing'; });
   document.addEventListener('mouseup', ()=>{ isDragging=false; lbImg.style.cursor='grab'; });
-  document.addEventListener('mousemove', (e)=>{
-    if(!isDragging) return;
-    const dx = e.clientX - lastX, dy = e.clientY - lastY;
-    lastX = e.clientX; lastY = e.clientY;
-    translateX += dx; translateY += dy;
-    lbImg.style.transform = `translate(${translateX}px,${translateY}px) scale(${currentScale})`;
-  });
+  document.addEventListener('mousemove', (e)=>{ if(!isDragging) return; const dx=e.clientX-lastX, dy=e.clientY-lastY; lastX=e.clientX; lastY=e.clientY; translateX += dx; translateY += dy; lbImg.style.transform = `translate(${translateX}px,${translateY}px) scale(${currentScale})`; });
 
-  // Touch pinch zoom (basic)
+  // touch pinch zoom (basic)
   let touchStartDist = 0, touchStartScale = 1;
-  lbImg.addEventListener('touchstart', (e)=>{
-    if(e.touches.length === 2){
-      touchStartDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-      touchStartScale = currentScale;
-    }
-  }, {passive:true});
-  lbImg.addEventListener('touchmove', (e)=>{
-    if(e.touches.length === 2){
-      const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-      const factor = d / (touchStartDist || d);
-      currentScale = Math.min(4, Math.max(1, touchStartScale * factor));
-      lbImg.style.transform = `translate(${translateX}px,${translateY}px) scale(${currentScale})`;
-    }
-  }, {passive:true});
+  lbImg.addEventListener('touchstart', (e)=>{ if(e.touches.length===2){ touchStartDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); touchStartScale = currentScale; } }, {passive:true});
+  lbImg.addEventListener('touchmove', (e)=>{ if(e.touches.length===2){ const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); const factor = d / (touchStartDist || d); currentScale = Math.min(4, Math.max(1, touchStartScale * factor)); lbImg.style.transform = `translate(${translateX}px,${translateY}px) scale(${currentScale})`; } }, {passive:true});
 
-  /* -------------- language toggle & assistant/chat (kept from before) -------------- */
-  let currentLang='en';
-  const langEn = document.getElementById('lang-en'), langGu=document.getElementById('lang-gu');
-  function setLang(l){ currentLang=l; if(l==='en'){ langEn.classList.add('active'); langGu.classList.remove('active'); document.getElementById('assistantSub').textContent='Tap mic or type — answers in English & Gujarati.' } else { langGu.classList.add('active'); langEn.classList.remove('active'); document.getElementById('assistantSub').textContent='માઇક દબાવો અથવા લખો — જવાબ ગુજરાતી માં.' } if(recognition) recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); }
-  langEn.addEventListener('click', ()=> setLang('en')); langGu.addEventListener('click', ()=> setLang('gu'));
+  /* ---------------- language toggle ---------------- */
+  let currentLang = 'en';
+  const langEn = document.getElementById('lang-en'), langGu = document.getElementById('lang-gu');
+  function setLang(l){
+    currentLang = l;
+    if(l==='en'){ langEn.classList.add('active'); langGu.classList.remove('active'); document.getElementById('assistantSub').textContent = 'Tap mic or type — answers in English & Gujarati.'; }
+    else { langGu.classList.add('active'); langEn.classList.remove('active'); document.getElementById('assistantSub').textContent = 'માઇક દબાવો અથવા લખો — જવાબ ગુજરાતી માં.'; }
+    if(recognition) recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN');
+  }
+  langEn.addEventListener('click', ()=> setLang('en'));
+  langGu.addEventListener('click', ()=> setLang('gu'));
 
-  const PRODUCT_PROMPTS = [
-    { q:/price|cost|₹|rupee/i, en:`The price is ${PRODUCT.price}.`, gu:`આ કિંમત ${PRODUCT.price} છે.` },
-    { q:/stock|available/i, en:'Stock varies by store — please contact us.', gu:'સ્ટોક સ્ટોર પર આધાર રાખે છે.' },
-    { q:/warrant(?:y|ies)|guarantee/i, en:'1 year warranty provided; check invoices for details.', gu:'1 વર્ષની વોરંટી ઉપલબ્ધ છે.' },
-    { q:/size|43|inch/i, en:'This model is 43 inches (diagonal).', gu:'આ મોડેલ 43 ઇંચ છે.' },
-    { q:/display|resolution|4k|hdr/i, en:'4K UHD with HDR support (HDR10) for vivid colors.', gu:'4K UHD અને HDR10 સપોર્ટ સાથે.' },
-    { q:/dimension|height|width|depth/i, en:'Please check the dimensions image in the details section.', gu:'માપની માહિતી માટે ડિટેલ્સ સેકશન જુઓ.' },
-    { q:/programs|smart|google tv/i, en:'This TV runs Google TV for apps and streaming.', gu:'આ TV માં Google TV છે.' },
-    { q:/.*/, en:'Sorry, ask about price, features, display, dimensions or warranty.', gu:'માફ કરશો, કૃપા કરીને કિંમત, ફીચર્સ અથવા વોરંટી વિશે પૂછો.' }
+  /* ---------------- canned prompts ---------------- */
+  const PROMPTS = [
+    { q:/price|cost|₹|rupee/i, en:`The price of this model is ${PRODUCT.price}.`, gu:`આ મોડેલની કિંમત ${PRODUCT.price} છે.` },
+    { q:/dimensions|dimension|size|height|width|depth/i, en:'Please check the dimensions image in the details section — typical 43" TV dimensions are on the image.', gu:'માપ માટે ડિટેલ્સ સેકશનનું ચિત્ર જુઓ — સામાન્ય 43" TV ના માપ અહીં છે.' },
+    { q:/features|feature|what .* include/i, en:'Key features: 4K UHD display, HDR10, Google TV smart platform, AiPQ processor (models vary).', gu:'મુખ્ય ફીચર્સ: 4K UHD, HDR10, Google TV પિલેટફોર્મ, AiPQ પ્રોસેસર (મોડેલ પ્રમાણે બદલાય).' },
+    { q:/colour|color|available color/i, en:'Available colours depend on stock; common finishes are black/dark grey framing.', gu:'રંગ સ્ટોક પર આધાર રાખે છે; સામાન્ય રીતે બ્લેક/ડાર્ક ગ્રે ફિનિશ વિધેયના હોય છે.' },
+    { q:/energy|power|watt|consumption/i, en:'Power consumption varies by model and usage; typical 43" LED TVs use ~70–120W during operation.', gu:'ઉર્જા વપરાશ મોડેલ અને ઉપયોગ મુજબ બદલાય; સામાન્ય 43" TV લગભગ 70–120W ઉપયોગ કરે છે.' },
+    { q:/warrant|guarantee/i, en:'This product includes 1 year manufacturer warranty. Contact the store for extended plans.', gu:'આ ઉત્પાદન સાથે 1 વર્ષની મેન્યુફેક્ચરર વોરંટી મળે છે.' },
+    { q:/display|hdr|4k/i, en:'Display: 4K UHD with HDR10 support for improved dynamic range and vivid colors.', gu:'ડિસ્પ્લે: 4K UHD HDR10 સપોર્ટ સાથે.' },
+    { q:/stock|available/i, en:'Stock levels vary; please contact the store for real-time availability.', gu:'સ્ટોક પર આધાર છે; વાસ્તવિક ઉપલબ્ધતા માટે સ્ટોર વ્યક્તિ સાથે સંપર્ક કરો.' },
+    { q:/.*/, en:'Sorry, I don\'t have that exact information. Ask about price, features, display, dimensions or warranty.', gu:'માફ કરશો, મારી પાસે તે ચોક્કસ માહિતી નથી. કૃપા કરીને કિંમત, ફીચર્સ અથવા વોરંટી વિશે પૂછો.' }
   ];
-  const GLOBAL_PROMPTS = [{ q:/service|support|repair/i, en:'We provide service support; contact the store for details.', gu:'વોરંટી અને સર્વિસ માટે સ્ટોર સંપર્ક કરો.' }];
 
   function findAnswer(text){
     const q = text.toLowerCase();
-    for(const p of PRODUCT_PROMPTS){ if(p.q.test(q)) return (currentLang==='en' ? p.en : p.gu); }
-    for(const g of GLOBAL_PROMPTS){ if(g.q.test(q)) return (currentLang==='en' ? g.en : g.gu); }
+    for(const p of PROMPTS) if(p.q.test(q)) return (currentLang==='en' ? p.en : p.gu);
     return null;
   }
 
-  // speech synthesis & tap sound
-  function speak(text){ if(!('speechSynthesis' in window)) return; const u=new SpeechSynthesisUtterance(text); u.lang = (currentLang==='en' ? 'en-IN':'gu-IN'); window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
-  let audioCtx=null;
-  function playTap(){ try{ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); const now=audioCtx.currentTime; const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type='sine'; o.frequency.setValueAtTime(1100,now); g.gain.setValueAtTime(0,now); g.gain.linearRampToValueAtTime(0.12, now+0.002); g.gain.exponentialRampToValueAtTime(0.001, now+0.12); o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.14);}catch(e){} }
-
-  // recognition
-  let recognition=null, lastHeard=false;
-  if(window.SpeechRecognition || window.webkitSpeechRecognition){
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SR(); recognition.lang='en-IN'; recognition.interimResults=false; recognition.maxAlternatives=1;
-    recognition.onresult = (e)=>{ lastHeard=true; const txt=e.results[0][0].transcript; addMessage(txt,'user'); processQuery(txt); };
-    recognition.onend = ()=>{ document.getElementById('mainMic').classList.remove('listening'); if(!lastHeard) document.getElementById('transcript').textContent = (currentLang==='en' ? 'Tap mic to speak' : 'માઇક દબાવો અને બોલો'); lastHeard=false; };
-    recognition.onerror = (e)=>{ document.getElementById('transcript').textContent = 'Error: ' + (e.error || e.message); document.getElementById('mainMic').classList.remove('listening'); lastHeard=false; };
+  /* ---------------- speech synthesis & tap sound ---------------- */
+  function speak(text){
+    if(!('speechSynthesis' in window)) return;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN');
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+  }
+  let audioCtx = null;
+  function playTap(){
+    try{
+      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+      const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+      o.type = 'sine'; o.frequency.setValueAtTime(1200, now);
+      g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(0.12, now + 0.002); g.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now + 0.14);
+    }catch(e){}
   }
 
-  // chat UI functions
-  const messages = document.getElementById('messages');
-  function addMessage(text, who='user'){ const b=document.createElement('div'); b.className='bubble ' + (who==='user' ? 'user' : 'bot'); b.textContent = text; messages.appendChild(b); messages.scrollTop = messages.scrollHeight; }
-  function respond(text){ if(!text) text = (currentLang==='en' ? "Sorry, I don't have that info. Ask about price, display, dimensions or warranty." : "માફ કરશો, મારી પાસે તે માહિતી નથી."); document.getElementById('transcript').textContent = (currentLang==='en' ? 'Assistant: ' : 'સહાયક: ') + text; addMessage(text,'bot'); speak(text); }
-  function processQuery(text){ const ans = findAnswer(text); if(ans){ respond(ans); } else { respond(null); } }
+  /* ---------------- speech recognition (optional) ---------------- */
+  let recognition = null; let heard=false;
+  if(window.SpeechRecognition || window.webkitSpeechRecognition){
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SR(); recognition.lang = 'en-IN'; recognition.interimResults=false; recognition.maxAlternatives=1;
+    recognition.onresult = (e)=>{ heard=true; const txt = e.results[0][0].transcript; addMessage(txt,'user'); handleQuery(txt); };
+    recognition.onend = ()=>{ document.getElementById('mainMic').classList.remove('listening'); if(!heard) document.getElementById('transcript').textContent = (currentLang==='en' ? 'Tap mic to speak' : 'માઇક દબાવો અને બોલો'); heard=false; };
+    recognition.onerror = (e)=>{ document.getElementById('transcript').textContent = 'Error: ' + (e.error || e.message); document.getElementById('mainMic').classList.remove('listening'); heard=false; };
+  }
 
-  // mic handlers
+  /* ---------------- chat UI ---------------- */
+  const messages = document.getElementById('messages');
+  function addMessage(text, who='user'){
+    const b = document.createElement('div'); b.className = 'bubble ' + (who==='user' ? 'user' : 'bot'); b.textContent = text;
+    messages.appendChild(b); messages.scrollTop = messages.scrollHeight;
+  }
+  function respond(text){
+    if(!text) text = (currentLang==='en' ? "Sorry, I don't have that info. Ask about price, features, display, dimensions or warranty." : "માફ કરશો, મારી પાસે તે માહિતી નથી. કૃપા કરીને બીજા પ્રશ્ન પૂછો.");
+    document.getElementById('transcript').textContent = (currentLang==='en' ? 'Assistant: ' : 'સહાયક: ') + text;
+    addMessage(text, 'bot');
+    speak(text);
+  }
+
+  function handleQuery(text){
+    const ans = findAnswer(text);
+    if(ans){ respond(ans); } else { respond(null); }
+  }
+
+  // main mic click
   const mainMic = document.getElementById('mainMic');
-  mainMic.addEventListener('click', ()=> {
+  mainMic.addEventListener('click', ()=>{
     playTap();
     if(!recognition){
       const q = prompt(currentLang==='en' ? 'Type your question:' : 'તમારો પ્રશ્ન લખો:');
-      if(q){ addMessage(q,'user'); processQuery(q); } return;
+      if(q){ addMessage(q,'user'); handleQuery(q); }
+      return;
     }
     mainMic.classList.add('listening');
     document.getElementById('transcript').textContent = (currentLang==='en' ? 'Listening...' : 'શુણવામાં આવી રહ્યું છે...');
-    lastHeard=false; recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); try{ recognition.start(); }catch(e){ mainMic.classList.remove('listening'); }
+    heard=false;
+    recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN');
+    try{ recognition.start(); }catch(e){ mainMic.classList.remove('listening'); }
   });
-  mainMic.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' ') e.target.click(); });
 
-  // chat send / chat mic
-  const chatInput = document.getElementById('chatInput'), sendBtn = document.getElementById('sendBtn'), chatMicEl = document.getElementById('chatMic');
-  sendBtn.addEventListener('click', ()=> { const v = chatInput.value.trim(); if(!v) return; addMessage(v,'user'); chatInput.value=''; processQuery(v); });
-  chatInput.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); sendBtn.click(); }});
-  chatMicEl.addEventListener('click', ()=> {
+  // chat send and chat mic
+  const chatInput = document.getElementById('chatInput'), sendBtn = document.getElementById('sendBtn'), chatMic = document.getElementById('chatMic');
+  sendBtn.addEventListener('click', ()=>{ const v = chatInput.value.trim(); if(!v) return; addMessage(v,'user'); chatInput.value=''; handleQuery(v); });
+  chatInput.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); sendBtn.click(); }});
+  chatMic.addEventListener('click', ()=>{
     playTap();
     if(!recognition){
       const q = prompt(currentLang==='en' ? 'Type your question:' : 'તમારો પ્રશ્ન લખો:');
-      if(q){ addMessage(q,'user'); processQuery(q); } return;
+      if(q){ addMessage(q,'user'); handleQuery(q); } return;
     }
-    document.getElementById('mainMic').classList.add('listening');
+    mainMic.classList.add('listening');
     document.getElementById('transcript').textContent = (currentLang==='en' ? 'Listening...' : 'શુણવામાં આવી રહ્યું છે...');
-    lastHeard=false; recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); try{ recognition.start(); }catch(e){ document.getElementById('mainMic').classList.remove('listening'); }
+    heard=false; recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN');
+    try{ recognition.start(); }catch(e){ mainMic.classList.remove('listening'); }
   });
 
-  // initial language
+  // init default language and transcript
   setLang('en');
   document.getElementById('transcript').textContent = 'Assistant ready. Select language and tap mic or type your question.';
 });
 </script>
 </body>
 </html>
-

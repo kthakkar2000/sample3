@@ -6,84 +6,104 @@
 <title>Kalindi — Samsung washing machine 12kg</title>
 <link rel="icon" href="assets/ktpl-new-logo.png">
 <style>
-  /* ---------- Color theme: Deep Navy + Sunset (warm coral + amber) ---------- */
+  /* ---------- Theme: modern deep navy + warm accent ---------- */
   :root{
-    --bg-1: #051028;        /* deep navy */
-    --bg-2: #071220;        /* deep teal shadow */
-    --panel: #07162a;
-    --muted: #9fb0c4;
-    --accent1: #ff6b6b;     /* warm coral */
-    --accent2: #ffd166;     /* warm amber */
+    --bg-1:#051026;
+    --bg-2:#071424;
+    --card:#071526;
+    --muted:#9fb0c4;
+    --accent1:#ff6b6b;
+    --accent2:#ffd166;
     --glass: rgba(255,255,255,0.03);
-    --card-grad: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    --text: #e6f2fb;
-    --card-shadow: rgba(2,8,18,0.7);
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    --text:#e9f7ff;
+    --soft:#0b2330;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
   }
-
   html,body{height:100%;margin:0;background:
-    radial-gradient(700px 350px at 10% 8%, rgba(255,107,107,0.04), transparent 8%),
+    radial-gradient(700px 360px at 12% 8%, rgba(255,107,107,0.03), transparent 8%),
     linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--text); -webkit-font-smoothing:antialiased;}
 
-  .wrap{max-width:520px;margin:18px auto;padding:18px}
+  .wrap{max-width:980px;margin:18px auto;padding:18px}
 
-  header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}
-  .brand{display:flex;gap:14px;align-items:center}
-  .logo{width:92px;height:92px;border-radius:14px;overflow:hidden;background:#fff;padding:10px;box-shadow:0 14px 44px rgba(2,6,12,0.65)}
+  header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px}
+  .brand{display:flex;gap:16px;align-items:center}
+  .logo{width:110px;height:110px;border-radius:14px;overflow:hidden;background:#fff;padding:10px;box-shadow:0 18px 60px rgba(3,6,12,0.6)}
   .logo img{width:100%;height:100%;object-fit:contain}
   .brand-info{line-height:1}
-  .brand-name{font-weight:900;font-size:18px;letter-spacing:0.2px}
-  .brand-sub{color:var(--muted);font-size:12px;margin-top:4px}
+  .brand-name{font-weight:900;font-size:20px}
+  .brand-sub{color:var(--muted);font-size:13px;margin-top:4px}
 
-  .lang-toggle{display:flex;gap:8px}
-  .lang{padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:800;font-size:13px}
-  .lang.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061016;box-shadow:0 14px 40px rgba(255,107,107,0.08); transform:translateY(-1px)}
+  .lang-toggle{display:flex;gap:10px}
+  .lang{padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:800}
+  .lang.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061016;box-shadow:0 12px 36px rgba(255,107,107,0.06);transform:translateY(-1px)}
 
-  .card{background:var(--card-grad);border-radius:18px;padding:14px;box-shadow:0 18px 50px var(--card-shadow)}
-  .gallery{position:relative;border-radius:12px;overflow:hidden}
-  .slides{display:flex;transition:transform .36s cubic-bezier(.2,.9,.2,1)}
-  .slides img{width:100%;height:360px;object-fit:cover;flex-shrink:0;background:#04101a}
-  .dots{position:absolute;left:12px;bottom:12px;display:flex;gap:8px}
-  .dot{width:10px;height:10px;border-radius:8px;background:rgba(255,255,255,0.06);box-shadow:0 2px 6px rgba(2,8,18,0.6)}
+  /* main product / card */
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:18px;padding:14px;box-shadow:0 20px 60px rgba(2,8,18,0.7)}
+  .grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
+  @media (max-width:900px){ .grid{grid-template-columns:1fr; } }
+
+  /* gallery */
+  .gallery{position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#041218,#061428)}
+  .slides{display:flex;transition:transform .36s cubic-bezier(.2,.9,.2,1);touch-action:pan-y}
+  .slides img{width:100%;height:420px;object-fit:cover;flex-shrink:0;cursor:zoom-in;transition:transform .28s ease}
+  @media (max-width:520px){ .slides img{height:260px} }
+
+  .dots{position:absolute;left:12px;bottom:12px;display:flex;gap:8px;z-index:12}
+  .dot{width:10px;height:10px;border-radius:8px;background:rgba(255,255,255,0.06);box-shadow:0 2px 6px rgba(0,0,0,0.6)}
   .dot.active{background:linear-gradient(90deg,var(--accent1),var(--accent2));transform:scale(1.1);box-shadow:0 10px 28px rgba(255,107,107,0.12)}
 
-  .title-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
-  .product-title{font-weight:900;font-size:18px}
-  .price{font-weight:900;color:var(--accent2);background:linear-gradient(90deg, rgba(255,209,102,0.06), rgba(255,107,107,0.03));padding:6px 10px;border-radius:10px}
+  .meta{padding:6px 0}
+  .product-title{font-weight:900;font-size:20px;margin-bottom:6px}
+  .price{font-weight:900;color:var(--accent2);display:inline-block;padding:6px 10px;border-radius:10px;background:linear-gradient(90deg, rgba(255,209,102,0.06), rgba(255,107,107,0.02));}
 
-  .muted{color:var(--muted);font-size:13px;margin-top:8px}
+  .rating{color:var(--muted);font-size:13px;margin-top:6px}
 
-  .specs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
-  .spec{background:var(--glass);padding:12px;border-radius:12px;font-size:13px;color:var(--text);border:1px solid rgba(255,255,255,0.02)}
+  .specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .spec{background:var(--glass);padding:10px;border-radius:10px;font-size:13px;color:var(--text);border:1px solid rgba(255,255,255,0.02);min-width:120px}
 
-  .assistant{display:flex;gap:14px;align-items:center;margin-top:16px;padding:14px;border-radius:14px;background:linear-gradient(90deg, rgba(255,107,107,0.04), rgba(255,209,102,0.02)) ;box-shadow:0 10px 30px rgba(2,8,18,0.45)}
+  /* assistant & chat */
+  .assistant{display:flex;gap:14px;align-items:center;margin-top:14px;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(255,107,107,0.04), rgba(255,209,102,0.02));box-shadow:0 12px 36px rgba(2,8,18,0.5)}
   .mic{width:64px;height:64px;border-radius:14px;background:linear-gradient(180deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:22px;color:#061016;cursor:pointer;border:0;box-shadow:0 12px 30px rgba(2,8,18,0.5)}
-  .mic.listening{transform:scale(1.05);box-shadow:0 24px 60px rgba(255,107,107,0.16)}
+  .mic.listening{transform:scale(1.06);box-shadow:0 28px 70px rgba(255,107,107,0.16);animation:micPulse 1200ms infinite}
+  @keyframes micPulse{0%{box-shadow:0 12px 30px rgba(255,107,107,0.08)}50%{box-shadow:0 28px 70px rgba(255,107,107,0.18)}100%{box-shadow:0 12px 30px rgba(255,107,107,0.08)}}
   .assistant-info{flex:1}
   .assistant-title{font-weight:800}
   .assistant-sub{font-size:13px;color:var(--muted);margin-top:6px}
   .transcript{margin-top:8px;color:var(--muted);font-size:14px;min-height:44px}
 
   /* chat */
-  .chat{margin-top:16px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:12px}
-  .messages{max-height:290px;overflow:auto;display:flex;flex-direction:column;gap:10px;padding-right:6px}
-  .bubble{padding:12px;border-radius:12px;max-width:80%;font-size:14px;line-height:1.38}
-  .bubble.user{align-self:flex-end;background:linear-gradient(90deg,var(--accent2),#ffb085);color:#091016;font-weight:800}
+  .chat{margin-top:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+  .messages{max-height:220px;overflow:auto;display:flex;flex-direction:column;gap:10px;padding-right:6px}
+  .bubble{padding:10px 12px;border-radius:12px;max-width:80%;font-size:14px;line-height:1.35}
+  .bubble.user{align-self:flex-end;background:linear-gradient(90deg,var(--accent2),#ffb085);color:#061016;font-weight:800}
   .bubble.bot{align-self:flex-start;background:rgba(255,255,255,0.04);color:#e9f6fb}
-  .input-row{display:flex;gap:8px;align-items:center;margin-top:6px}
-  .input-row input{flex:1;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit;font-size:15px;outline:none}
-  .btn-send{padding:10px 14px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061016;cursor:pointer;font-weight:900}
-  .btn-voice{padding:10px;border-radius:12px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+  .input-row{display:flex;gap:8px;align-items:center}
+  .input-row input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit;font-size:14px}
+  .btn-send{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061016;cursor:pointer;font-weight:900}
+  .btn-voice{padding:10px;border-radius:10px;border:0;background:transparent;color:var(--muted);cursor:pointer}
 
-  footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+  /* details / feature gallery */
+  .details{margin-top:22px;display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+  @media (max-width:900px){ .details{grid-template-columns:1fr; } }
+  .desc-panel{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+  .desc-title{font-weight:800;margin-bottom:8px}
+  .desc-text{color:var(--muted);line-height:1.5;font-size:14px}
+  .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+  .feature-grid img{width:100%;height:140px;object-fit:cover;border-radius:10px;box-shadow:0 12px 36px rgba(2,8,18,0.5);transform:translateY(18px);opacity:0;transition:transform .6s ease,opacity .6s ease}
+  .feature-grid img.revealed{transform:none;opacity:1}
 
-  /* responsive */
-  @media (max-width:420px){
-    .slides img{height:250px}
-    .logo{width:68px;height:68px}
-    .brand-name{font-size:15px}
-    .product-title{font-size:16px}
-  }
+  /* right side: tall product images */
+  .side-images{display:flex;flex-direction:column;gap:10px}
+  .side-images img{width:100%;height:160px;object-fit:cover;border-radius:10px;box-shadow:0 12px 36px rgba(2,8,18,0.5)}
+
+  /* lightbox fullscreen */
+  .lightbox{position:fixed;inset:0;background:rgba(2,6,12,0.85);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  .lightbox.show{opacity:1;pointer-events:auto}
+  .lightbox img{max-width:92%;max-height:92%;cursor:grab;transition:transform .12s ease}
+  .closeBtn{position:fixed;top:18px;right:18px;background:rgba(255,255,255,0.06);border-radius:10px;padding:8px 10px;border:0;color:var(--text);cursor:pointer;z-index:10000}
+
+  /* small utility */
+  footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center}
 </style>
 </head>
 <body>
@@ -104,191 +124,308 @@
     </header>
 
     <main class="card" role="main">
-      <div class="gallery" id="gallery">
-        <div class="slides" id="slides"></div>
-        <div class="dots" id="dots" aria-hidden="true"></div>
-      </div>
+      <div class="grid">
+        <!-- left: gallery -->
+        <div>
+          <div class="gallery" id="gallery" aria-label="Product images">
+            <div class="slides" id="slides" aria-hidden="false"></div>
+            <div class="dots" id="dots" aria-hidden="true"></div>
+          </div>
 
-      <div class="title-row">
-        <div class="product-title" id="productTitle">Samsung washing machine 12kg</div>
-        <div class="price" id="price">₹65,000</div>
-      </div>
-      <div class="muted" id="rating">4.7 ★ • 2 year warranty</div>
+          <div class="meta">
+            <div class="product-title" id="productTitle">Samsung washing machine 12kg</div>
+            <div class="rating" id="rating">4.7 ★ • 2 year warranty</div>
+            <div style="margin-top:8px" class="price" id="price">₹65,000</div>
+            <div class="specs" id="specs"></div>
+          </div>
 
-      <div class="specs" id="specs"></div>
+          <div class="assistant" role="region" aria-label="Voice assistant">
+            <button class="mic" id="mainMic" title="Tap to speak" aria-pressed="false">🎙️</button>
+            <div class="assistant-info">
+              <div class="assistant-title" id="assistantTitle">Product Voice Assistant</div>
+              <div class="assistant-sub" id="assistantSub">Tap mic or type — answers in English & Gujarati.</div>
+              <div class="transcript" id="transcript">Assistant ready. Select language and tap mic or type your question.</div>
+            </div>
+          </div>
 
-      <div class="assistant" role="region" aria-label="Voice assistant">
-        <button class="mic" id="mainMic" title="Tap to speak" aria-pressed="false">🎙️</button>
-        <div class="assistant-info">
-          <div class="assistant-title" id="assistantTitle">Product Voice Assistant</div>
-          <div class="assistant-sub" id="assistantSub">Tap mic or type — answers in English & Gujarati.</div>
-          <div class="transcript" id="transcript">Assistant ready. Select language and tap mic or type your question.</div>
+          <div class="chat" aria-live="polite">
+            <div class="messages" id="messages" role="log" aria-relevant="additions"></div>
+            <div class="input-row">
+              <input id="chatInput" placeholder="Type your question..." autocomplete="off" />
+              <button class="btn-send" id="sendBtn">Send</button>
+              <button class="btn-voice" id="chatMic" title="Speak from chat">🎙️</button>
+            </div>
+          </div>
         </div>
+
+        <!-- right: side images / quick specs -->
+        <aside class="side-images" id="sideImages" aria-hidden="false">
+          <!-- filled by JS -->
+        </aside>
       </div>
 
-      <div class="chat" aria-live="polite">
-        <div class="messages" id="messages" role="log" aria-relevant="additions"></div>
-        <div class="input-row">
-          <input id="chatInput" placeholder="Type your question..." autocomplete="off" />
-          <button class="btn-send" id="sendBtn">Send</button>
-          <button class="btn-voice" id="chatMic" title="Speak from chat">🎙️</button>
+      <!-- details & AI images -->
+      <section class="details" id="details">
+        <div class="desc-panel">
+          <div class="desc-title">Product Details</div>
+          <div class="desc-text" id="descText">
+            Samsung 12 kg front-load washing machine — efficient Digital Inverter motor, multiple wash programs including Quick and Eco, quiet operation and smart features on select models. Scroll the right to see AI-clarity images, display, processor and dimension visuals.
+          </div>
+
+          <div class="feature-grid" id="featureGrid">
+            <!-- images added by JS, they will animate in when scrolled -->
+          </div>
         </div>
-      </div>
+
+        <div>
+          <!-- tall list / gallery on right -->
+          <div class="desc-panel" style="margin-bottom:12px">
+            <div class="desc-title">AI & Feature Images</div>
+            <img src="assets/ai clarity.webp" alt="AI clarity" style="width:100%;border-radius:10px;margin-top:8px"/>
+            <img src="assets/ai contrast.webp" alt="AI contrast" style="width:100%;border-radius:10px;margin-top:12px"/>
+          </div>
+
+          <div class="desc-panel">
+            <div class="desc-title">Dimensions & Display</div>
+            <img src="assets/dimension.webp" alt="dimensions" style="width:100%;border-radius:10px;margin-top:8px"/>
+            <img src="assets/display.webp" alt="display" style="width:100%;border-radius:10px;margin-top:12px"/>
+          </div>
+        </div>
+      </section>
 
     </main>
 
     <footer>© Kalindi Tradelinks Pvt Ltd</footer>
   </div>
 
+  <!-- lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+    <button class="closeBtn" id="lbClose">Close ✕</button>
+    <img id="lbImg" src="" alt="expanded image" />
+  </div>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  /* ---------------- product configuration ---------------- */
   const PRODUCT = {
     id: 'samsung-12kg',
     title: 'Samsung washing machine 12kg',
     price: '₹65,000',
     rating: '4.7 ★ • 2 year warranty',
     images: ['assets/wm1.jpg','assets/wm2.jpg','assets/wm3.jpg','assets/wm4.jpg','assets/wm5.jpg'],
-    specs: {
-      'Capacity': '12 kg',
-      'Energy': '5 Star',
-      'RPM': '1200',
-      'Warranty': '2 years'
-    },
+    specs: { Capacity:'12 kg', Energy:'5 Star', RPM:'1200', Warranty:'2 years' },
     description_en: 'Samsung 12 kg front-load washers combine AI wash optimisation, Digital Inverter motor, Quick/Eco programs, and SmartThings on select models.',
-    description_gu: 'Samsung 12 kg ફ્રન્ટ-લોડ વોશર્સમાં AI વોશ, ડિજિટલ ઇનવર્ટર મોટર, ક્વિક/એકો પ્રોગ્રામ અને SmartThings સપોર્ટ હોય છે.'
+    description_gu: 'Samsung 12 kg ફ્રન્ટ-લોડ વોશર્સમાં AI વોશ, ડિજિટલ ઇનવર્ટર મોટર, ક્વિક/એકો પ્રોગ્રામ અને SmartThings સપોર્ટ હોય છે.',
+    featureImages: [
+      'assets/description1.webp','assets/description2.webp','assets/front2.webp','assets/proccessor.webp',
+      'assets/back4.webp','assets/side1.webp'
+    ]
   };
 
-  // Populate UI
+  /* ------------- populate UI ------------- */
   document.getElementById('productTitle').textContent = PRODUCT.title;
   document.getElementById('price').textContent = PRODUCT.price;
   document.getElementById('rating').textContent = PRODUCT.rating;
 
-  const specsEl = document.getElementById('specs'); specsEl.innerHTML = '';
+  // specs
+  const specsEl = document.getElementById('specs');
+  specsEl.innerHTML = '';
   for(const [k,v] of Object.entries(PRODUCT.specs)){
-    const d = document.createElement('div'); d.className='spec';
-    d.innerHTML = `<strong>${k}</strong><div style="color:var(--muted);margin-top:6px">${v}</div>`;
-    specsEl.appendChild(d);
+    const s = document.createElement('div'); s.className = 'spec'; s.innerHTML = `<strong>${k}</strong><div style="color:var(--muted);margin-top:6px">${v}</div>`; specsEl.appendChild(s);
   }
 
-  // Slider build
-  const slides = document.getElementById('slides'), dots = document.getElementById('dots');
+  // side images
+  const sideImages = document.getElementById('sideImages');
+  sideImages.innerHTML = '';
+  ['assets/front2.webp','assets/proccessor.webp','assets/side1.webp'].forEach(src=>{
+    const i=document.createElement('img'); i.src=src; i.alt='feature'; sideImages.appendChild(i);
+  });
+
+  /* ------------- slider build ------------- */
+  const slidesEl = document.getElementById('slides'), dotsEl = document.getElementById('dots');
   function buildSlides(){
-    slides.innerHTML=''; dots.innerHTML='';
-    PRODUCT.images.forEach((src,i) => {
-      const img = document.createElement('img'); img.src = src; img.alt = PRODUCT.title + ' image ' + (i+1);
+    slidesEl.innerHTML=''; dotsEl.innerHTML='';
+    PRODUCT.images.forEach((src,i)=>{
+      const img=document.createElement('img');
+      img.src=src; img.alt = PRODUCT.title + ' image ' + (i+1);
       img.addEventListener('error', ()=>{ img.style.display='none'; });
-      slides.appendChild(img);
-      const dot = document.createElement('div'); dot.className = 'dot' + (i===0 ? ' active' : '');
-      dot.addEventListener('click', ()=> { idx=i; updateSlide(); });
-      dots.appendChild(dot);
+      // click -> open lightbox
+      img.addEventListener('click', ()=> openLightbox(src));
+      // hover zoom on desktop: scale on hover
+      slidesEl.appendChild(img);
+
+      const d=document.createElement('div'); d.className = 'dot' + (i===0 ? ' active' : '');
+      d.addEventListener('click', ()=> { idx = i; updateSlide(); });
+      dotsEl.appendChild(d);
     });
   }
   let idx = 0;
-  function updateSlide(){ slides.style.transform = `translateX(${-idx*100}%)`; Array.from(dots.children).forEach((d,i)=> d.classList.toggle('active', i===idx)); }
+  function updateSlide(){ slidesEl.style.transform = `translateX(${-idx*100}%)`; Array.from(dotsEl.children).forEach((d,i)=> d.classList.toggle('active', i===idx)); }
   buildSlides();
-  setInterval(()=> { if(slides.children.length){ idx = (idx+1) % slides.children.length; updateSlide(); } }, 4500);
+  setInterval(()=> { if(slidesEl.children.length){ idx = (idx+1) % slidesEl.children.length; updateSlide(); } }, 4500);
 
-  // swipe support
-  let startX = null; const gallery = document.getElementById('gallery');
+  // swipe support for mobile
+  let startX = null;
+  const gallery = document.getElementById('gallery');
   gallery.addEventListener('touchstart', e => startX = e.changedTouches[0].clientX);
   gallery.addEventListener('touchend', e => {
     if(startX === null) return;
     const endX = e.changedTouches[0].clientX; const dx = endX - startX;
     if(Math.abs(dx) > 40){
-      if(dx < 0) idx = Math.min(idx+1, slides.children.length-1); else idx = Math.max(idx-1, 0);
+      if(dx < 0) idx = Math.min(idx+1, slidesEl.children.length-1); else idx = Math.max(idx-1,0);
       updateSlide();
     }
     startX = null;
   });
 
-  // Language toggle
+  /* ------------- feature grid (reveal on scroll) ------------- */
+  const featureGrid = document.getElementById('featureGrid');
+  PRODUCT.featureImages.forEach(src=>{
+    const img = document.createElement('img'); img.src = src;
+    img.alt = 'feature';
+    img.loading = 'lazy';
+    img.addEventListener('click', ()=> openLightbox(src));
+    featureGrid.appendChild(img);
+  });
+
+  // intersection observer for reveal
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(ent=>{
+      if(ent.isIntersecting){
+        ent.target.querySelectorAll('img').forEach(img=>img.classList.add('revealed'));
+      }
+    });
+  }, {threshold:0.22});
+  obs.observe(document.getElementById('details'));
+
+  /* ------------- lightbox + pan/zoom ------------- */
+  const lightbox = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'), lbClose = document.getElementById('lbClose');
+  let isDragging=false, lastX=0, lastY=0, currentScale=1, startScale=1;
+  function openLightbox(src){
+    lbImg.src = src;
+    lightbox.classList.add('show'); lightbox.setAttribute('aria-hidden','false');
+    currentScale = 1; lbImg.style.transform = 'translate(0px,0px) scale(1)';
+  }
+  function closeLightbox(){ lightbox.classList.remove('show'); lightbox.setAttribute('aria-hidden','true'); lbImg.src=''; }
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e)=> { if(e.target === lightbox) closeLightbox(); });
+
+  // basic pan/zoom for desktop
+  lbImg.addEventListener('wheel', (e)=>{
+    e.preventDefault();
+    const delta = -e.deltaY * 0.0015;
+    currentScale = Math.min(4, Math.max(1, currentScale + delta));
+    lbImg.style.transform = `translate(0px,0px) scale(${currentScale})`;
+  });
+  // drag to pan
+  lbImg.addEventListener('mousedown', (e)=>{
+    isDragging = true; lastX = e.clientX; lastY = e.clientY; lbImg.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mouseup', ()=>{ isDragging=false; lbImg.style.cursor='grab'; });
+  document.addEventListener('mousemove', (e)=>{
+    if(!isDragging) return;
+    const dx = e.clientX - lastX, dy = e.clientY - lastY;
+    lastX = e.clientX; lastY = e.clientY;
+    // read current translate from style
+    const transform = lbImg.style.transform || 'translate(0px,0px) scale(1)';
+    const m = transform.match(/translate\((-?\d+)px,(-?\d+)px\)\s*scale\(([\d.]+)\)/);
+    let tx=0, ty=0, sc=1;
+    if(m){ tx = parseFloat(m[1]) + dx; ty = parseFloat(m[2]) + dy; sc = parseFloat(m[3]); }
+    lbImg.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
+  });
+
+  /* ------------- language toggle ------------- */
   let currentLang = 'en';
   const langEn = document.getElementById('lang-en'), langGu = document.getElementById('lang-gu');
   function setLang(l){
     currentLang = l;
     if(l==='en'){ langEn.classList.add('active'); langGu.classList.remove('active'); document.getElementById('assistantSub').textContent='Tap mic or type — answers in English & Gujarati.'; }
-    else { langGu.classList.add('active'); langEn.classList.remove('active'); document.getElementById('assistantSub').textContent='માઇક દબાવો અથવા લખો — જવાબ અંગ્રેજી અને ગુજરાતી માં.'; }
-    if(recognition) recognition.lang = (currentLang === 'en' ? 'en-IN' : 'gu-IN');
+    else { langGu.classList.add('active'); langEn.classList.remove('active'); document.getElementById('assistantSub').textContent='માઇક દબાવો અથવા લખો — jawab ગુજરાતી માં.'; }
+    if(recognition) recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN');
   }
   langEn.addEventListener('click', ()=> setLang('en'));
   langGu.addEventListener('click', ()=> setLang('gu'));
 
-  // Prompts
+  /* ------------- canned prompts (product-specific) ------------- */
   const PRODUCT_PROMPTS = [
     { q: /price|cost|₹|rupee/i, en: `The price of this model is ${PRODUCT.price}.`, gu: `આ મોડેલની કિંમત ${PRODUCT.price} છે.` },
-    { q: /stock|available/i, en: 'Stock varies by store. Please contact us to confirm availability.', gu: 'સ્ટોક સ્ટોર પર આધાર રાખે છે. કૃપા કરીને સ્ટોરમાં તપાસો.' },
-    { q: /warrant(?:y|ies)|guarantee/i, en: 'This product comes with a 2 year manufacturer warranty covering defects and parts.', gu: 'આ ઉત્પાદન સાથે 2 વર્ષની વોરંટી મળે છે.' },
-    { q: /usage|how to use|how do i use/i, en: 'Load clothes evenly, use recommended detergent, select the correct program and avoid overloading.', gu: 'કપડાં સમાન રીતે લોડ કરો, સૂચિત ડિટર્જન્ટ વાપરો અને ઓવરલોડ ટાળો.' },
-    { q: /water|litre|consumption/i, en: 'Approx 50–70 litres per full wash depending on program.', gu: 'પુર્ણ વોશ માટે આશરે 50–70 લિટર પાણી વપરાય છે.' },
+    { q: /stock|available/i, en: 'Stock varies by store. Please contact us to confirm availability.', gu: 'સ્ટોક સ્ટોર્સ પર બદલાય છે. કૃપા કરીને સ્ટોર તપાસો.' },
+    { q: /warrant(?:y|ies)|guarantee/i, en: 'This product comes with a 2 year manufacturer warranty covering defects and parts.', gu: 'આ પ્રોડક્ટ સાથે 2 વર્ષની વોરંટી મળે છે.' },
+    { q: /usage|how to use|how do i use/i, en: 'Load clothes evenly, use recommended detergent, select the correct program and avoid overloading.', gu: 'કપડા સમ મિટ કરો, યોગ્ય પ્રોગ્રામ પસંદ કરો અને ઓવરલોડ ન કરો.' },
+    { q: /water|litre|consumption/i, en: 'Approx 50–70 litres per full wash depending on program.', gu: 'પ્રોગ્રામ આધારિત ~50–70 લીટરની પાણી વપરાય. ' },
     { q: /colour|color|available color/i, en: 'Common colours: Pearl White, Graphite Silver; availability depends on stock.', gu: 'પ્રાપ્ત રંગો: પર્લ વ્હાઈટ, ગ્રાફાઇટ સિલ્વર — સ્ટોક પર આધાર.' },
-    { q: /dimension|size|height|width|depth/i, en: PRODUCT.specs?.dimensions || 'Approx H 85 × W 60 × D 55–70 cm', gu: PRODUCT.specs?.dimensions || 'અંદાજિત માપ: H 85 × W 60 × D 55–70 સેમી' },
-    { q: /electric|power|watt|energy/i, en: 'Typical energy per full wash is around 1.2–1.5 kWh; Eco modes reduce energy use.', gu: 'પુરા વોશ માટે લગભગ 1.2–1.5 kWh ઊર્જા расход થાય છે.' },
-    { q: /dryer|dry function/i, en: 'Some variants are washer-dryer combos — check the specific model for dryer capability.', gu: 'કેટલાંક મોડેલ વોશર-ડ્રાયર હોઈ શકે છે; ચોક્કસ મોડેલ તપાસો.' },
-    { q: /inverter|digital inverter|motor/i, en: 'Yes — modern Samsung front-load machines use a Digital Inverter Motor for efficiency and durability.', gu: 'હા — આધુનિક મશીનમાં ડિજિટલ ઇનવર્ટર મોટર હોય છે.' },
-    { q: /advantages|why should i buy|benefit/i, en: 'Advantages: large capacity, efficient inverter motor, advanced wash programs and smart features on select models.', gu: 'લાભ: મોટી ક્ષમતા, કાર્યક્ષમ ઇનવર્ટર મોટર અને અદ્યતન પ્રોગ્રામ.' },
-    { q: /smaller|instead of a smaller capacity/i, en: '12kg handles bulky items and heavy loads in fewer cycles — saving time and energy.', gu: '12 kg મોટા લોડને ઓછા સાયકલમાં ધોઈ શકે છે — સમય અને ઊર્જા બચાવે છે.' },
-    { q: /programs|quick wash|eco wash|special programs/i, en: 'Yes — many models include Quick Wash, Eco mode and Hygiene/Steam cycles.', gu: 'હા — ક્વિક વોશ, એકો અને સ્ટીમ પ્રોગ્રામ ઉપલબ્ધ છે.' },
-    { q: /heavy loads|blankets|curtains/i, en: 'Yes — 12 kg is suitable for blankets, curtains and other bulky items.', gu: 'હા — 12 kg ભારે લોડ માટે યોગ્ય છે.' },
-    { q: /feedback|reviews|customer review/i, en: 'Sample feedback: 1) Great cleaning. 2) Large drum — great for bedding. 3) Smart features useful. 4) Quiet operation.', gu: 'ગ્રાહક પ્રતિસાદ: 1) સારી સફાઈ. 2) મોટી ડ્રમ. 3) સ્માર્ટ ફીચર્સ. 4) શાંત.' }
+    { q: /dimension|size|height|width|depth/i, en: 'Approx dimensions: H 85 cm × W 60 cm × D 55–70 cm (model dependent).', gu: 'માપ: H 85 cm × W 60 cm × D 55–70 cm (મોડેલ પર આધાર).' },
+    { q: /electric|power|watt|energy/i, en: 'Typical energy per full wash ~1.2–1.5 kWh; Eco modes reduce consumption.', gu: 'પૂરને વર્ષની ખपत ~1.2–1.5 kWh; એકો મોડ ઊર્જા બચાવે છે.' },
+    { q: /dryer|dry function/i, en: 'Some variants have dryer function; check specific model.', gu: 'કેટલાક મોડેલમાં ડ્રાયર ફંક્શન હોય છે; ચોક્કસ મોડેલ તપાસો.' },
+    { q: /inverter|digital inverter|motor/i, en: 'Yes — uses a Digital Inverter Motor for durability and efficiency.', gu: 'હા — ડિજિટલ ઇનવર્તર મોટર સાથે આવે છે.' },
+    { q: /advantages|why should i buy|benefit/i, en: 'Advantages: large capacity, efficient motor, advanced wash programs and optional smart features.', gu: 'લાભ: મોટી ક્ષમતા, કાર્યક્ષમ મોટર, અદ્યતન પ્રોગ્રામ અને SMART ફીચર્સ.' },
+    { q: /programs|quick wash|eco wash|special programs/i, en: 'Includes Quick Wash, Eco, Hygiene/Steam cycles on many variants.', gu: 'ક્વિક વોશ, એકો, સ્ટીમ/હાઇજીન પ્રોગ્રામ ઉપલબ્ધ છે.' },
+    { q: /heavy loads|blankets|curtains/i, en: 'Yes — 12kg handles blankets and bulky items comfortably.', gu: 'હા — 12 kg ભારે લોડ સરળે હેન્ડલ કરે છે.' },
+    { q: /feedback|reviews|customer review/i, en: 'Sample feedback: 1) Great cleaning. 2) Large drum — ideal for bedding. 3) Smart features useful. 4) Quiet operation.', gu: 'ગ્રાહક પ્રતિસાદ: 1) સારી સફાઈ. 2) મોટી ડ્રમ. 3) સ્માર્ટ ફીચર્સ. 4) શાંત.' }
   ];
-
   const GLOBAL_PROMPTS = [
-    { q: /service|repair|support/i, en: 'We provide doorstep service and free checkups during warranty period. Contact store.', gu: 'વોરંટી દરમિયાન ડોરસ્ટેપ સર્વિસ અને મફત ચેકઅપ ઉપલબ્ધ છે. સ્ટોર સંપર્ક કરો.' },
-    { q: /offer|discount|sale/i, en: 'Festive discounts available occasionally — check in-store for current offers.', gu: 'તહેવાર દરમિયાન ડિસ્કાઉન્ટ ઉપલબ્ધ હોય છે — સ્ટોર તપાસો.' }
+    { q: /service|repair|support/i, en: 'We provide doorstep service and free checkups during warranty period. Contact store.', gu: 'વોરંટી દરમિયાન ડોરસ્ટેપ સર્વિસ ઉપલબ્ધ છે. સ્ટોર સંપર્ક કરો.' }
   ];
-
   function findAnswer(text){
     const q = text.toLowerCase();
-    for(const p of PRODUCT_PROMPTS){ if(p.q.test(q)) return (currentLang==='en' ? p.en : p.gu); }
-    for(const g of GLOBAL_PROMPTS){ if(g.q.test(q)) return (currentLang==='en' ? g.en : g.gu); }
+    for(const p of PRODUCT_PROMPTS) if(p.q.test(q)) return (currentLang==='en' ? p.en : p.gu);
+    for(const g of GLOBAL_PROMPTS) if(g.q.test(q)) return (currentLang==='en' ? g.en : g.gu);
     if(/describe|description|details|model description|all description/i.test(q)) return currentLang==='en' ? PRODUCT.description_en : PRODUCT.description_gu;
     return null;
   }
 
-  // Speech synthesis & tap sound
-  function speak(text){
-    if(!('speechSynthesis' in window)) return;
-    const u = new SpeechSynthesisUtterance(text); u.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); u.rate = 1; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
-  }
-  let audioCtx = null;
-  function playTap(){
-    try{
-      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const now = audioCtx.currentTime; const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
-      o.type='sine'; o.frequency.setValueAtTime(1200, now); g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(0.12, now + 0.001);
-      g.gain.exponentialRampToValueAtTime(0.001, now + 0.12); o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now + 0.14);
-    }catch(e){}
-  }
+  /* ------------- speech (synthesis + tap) ------------- */
+  function speak(text){ if(!('speechSynthesis' in window)) return; const u=new SpeechSynthesisUtterance(text); u.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
+  let audioCtx=null;
+  function playTap(){ try{ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); const now=audioCtx.currentTime; const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type='sine'; o.frequency.setValueAtTime(1100,now); g.gain.setValueAtTime(0,now); g.gain.linearRampToValueAtTime(0.12, now+0.002); g.gain.exponentialRampToValueAtTime(0.001, now+0.12); o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.14);}catch(e){} }
 
-  // Recognition
-  let recognition = null; let heard = false;
+  /* ------------- recognition ------------- */
+  let recognition=null; let lastHeard=false;
   if(window.SpeechRecognition || window.webkitSpeechRecognition){
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SR(); recognition.lang = 'en-IN'; recognition.interimResults = false; recognition.maxAlternatives = 1;
-    recognition.onresult = (ev)=>{ heard = true; const txt = ev.results[0][0].transcript; addMessage(txt,'user'); processQuery(txt); };
-    recognition.onend = ()=>{ document.getElementById('mainMic').classList.remove('listening'); if(!heard) document.getElementById('transcript').textContent = (currentLang==='en' ? 'Tap mic to speak' : 'માઇક દબાવો અને બોલો'); heard = false; };
-    recognition.onerror = (ev)=>{ document.getElementById('transcript').textContent = 'Error: ' + (ev.error || ev.message); document.getElementById('mainMic').classList.remove('listening'); heard = false; };
+    recognition = new SR(); recognition.lang='en-IN'; recognition.interimResults=false; recognition.maxAlternatives=1;
+    recognition.onresult = (e)=>{ lastHeard=true; const txt=e.results[0][0].transcript; addMessage(txt,'user'); processQuery(txt); };
+    recognition.onend = ()=>{ document.getElementById('mainMic').classList.remove('listening'); if(!lastHeard) document.getElementById('transcript').textContent = (currentLang==='en' ? 'Tap mic to speak' : 'માઇક દબાવો અને બોલો'); lastHeard=false; };
+    recognition.onerror = (e)=>{ document.getElementById('transcript').textContent = 'Error: ' + (e.error || e.message); document.getElementById('mainMic').classList.remove('listening'); lastHeard=false; };
   }
 
-  // Chat UI
+  /* ------------- chat UI ------------- */
   const messages = document.getElementById('messages');
-  function addMessage(text, who='user'){ const b = document.createElement('div'); b.className = 'bubble ' + (who==='user' ? 'user' : 'bot'); b.textContent = text; messages.appendChild(b); messages.scrollTop = messages.scrollHeight; }
-  function respond(text){ if(!text) text = (currentLang==='en' ? "Sorry, I don't have that info. Ask about price, usage, warranty or features." : "માફ કરશો, મારી પાસે તે માહિતી નથી. કૃપા કરીને બીજા પ્રશ્ન પૂછો."); document.getElementById('transcript').textContent = (currentLang==='en' ? 'Assistant: ' : 'સહાયક: ') + text; addMessage(text,'bot'); speak(text); }
+  function addMessage(text, who='user'){ const b=document.createElement('div'); b.className='bubble ' + (who==='user' ? 'user' : 'bot'); b.textContent=text; messages.appendChild(b); messages.scrollTop = messages.scrollHeight; }
+  function respond(text){ if(!text) text = (currentLang==='en' ? "Sorry, I don't have that info. Ask about price, usage, warranty or features." : "માફ કરશો, મારી પાસે તે માહિતી નથી."); document.getElementById('transcript').textContent = (currentLang==='en' ? 'Assistant: ' : 'સહાયક: ') + text; addMessage(text,'bot'); speak(text); }
+  function processQuery(text){ const ans = findAnswer(text); if(ans) { respond(ans); return; } respond(null); }
 
-  function processQuery(text){ const ans = findAnswer(text); if(ans){ respond(ans); return; } respond(null); }
-
-  // Main mic
+  /* ------------- main mic handlers ------------- */
   const mainMic = document.getElementById('mainMic');
-  mainMic.addEventListener('click', ()=>{ playTap(); if(!recognition){ const q = prompt(currentLang==='en' ? 'Type your question:' : 'તમારો પ્રશ્ન લખો:'); if(q){ addMessage(q,'user'); processQuery(q); } return; } mainMic.classList.add('listening'); document.getElementById('transcript').textContent = (currentLang==='en' ? 'Listening...' : 'શુણવામાં આવી રહ્યું છે...'); heard = false; recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); try{ recognition.start(); }catch(e){ mainMic.classList.remove('listening'); } });
-  mainMic.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') e.target.click(); });
+  mainMic.addEventListener('click', ()=> {
+    playTap();
+    if(!recognition){
+      const q = prompt(currentLang==='en' ? 'Type your question:' : 'તમારો પ્રશ્ન લખો:');
+      if(q){ addMessage(q,'user'); processQuery(q); } return;
+    }
+    mainMic.classList.add('listening');
+    document.getElementById('transcript').textContent = (currentLang==='en' ? 'Listening...' : 'શુણવામાં આવી રહ્યું છે...');
+    lastHeard=false; recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); try{ recognition.start(); }catch(e){ mainMic.classList.remove('listening'); }
+  });
+  // keyboard activation
+  mainMic.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' ') e.target.click(); });
 
-  // Chat send & mic
-  const chatInput = document.getElementById('chatInput'), sendBtn = document.getElementById('sendBtn'), chatMic = document.getElementById('chatMic');
-  sendBtn.addEventListener('click', ()=>{ const v = chatInput.value.trim(); if(!v) return; addMessage(v,'user'); chatInput.value=''; processQuery(v); });
-  chatInput.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); sendBtn.click(); }});
-  chatMic.addEventListener('click', ()=>{ playTap(); if(!recognition){ const q = prompt(currentLang==='en' ? 'Type your question:' : 'તમારો પ્રશ્ન લખો:'); if(q){ addMessage(q,'user'); processQuery(q); } return; } mainMic.classList.add('listening'); document.getElementById('transcript').textContent = (currentLang==='en' ? 'Listening...' : 'શુણવામાં આવી રહ્યું છે...'); heard = false; recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); try{ recognition.start(); }catch(e){ mainMic.classList.remove('listening'); } });
+  // chat send & mic
+  const chatInput = document.getElementById('chatInput'), sendBtn = document.getElementById('sendBtn'), chatMicEl = document.getElementById('chatMic');
+  sendBtn.addEventListener('click', ()=> { const v = chatInput.value.trim(); if(!v) return; addMessage(v,'user'); chatInput.value=''; processQuery(v); });
+  chatInput.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); sendBtn.click(); }});
+  chatMicEl.addEventListener('click', ()=> {
+    playTap();
+    if(!recognition){
+      const q = prompt(currentLang==='en' ? 'Type your question:' : 'તમારો પ્રશ્ન લખો:');
+      if(q){ addMessage(q,'user'); processQuery(q); } return;
+    }
+    mainMic.classList.add('listening');
+    document.getElementById('transcript').textContent = (currentLang==='en' ? 'Listening...' : 'શુણવામાં આવી રહ્યું છે...');
+    lastHeard=false; recognition.lang = (currentLang==='en' ? 'en-IN' : 'gu-IN'); try{ recognition.start(); }catch(e){ mainMic.classList.remove('listening'); }
+  });
 
-  // Language init
+  // init language default
   setLang('en');
   document.getElementById('transcript').textContent = 'Assistant ready. Select language and tap mic or type your question.';
 

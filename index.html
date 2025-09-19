@@ -3,16 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Kalindi — TCL 43&quot; P6K 4K HDR TV (43P6K)</title>
+<title>Kalindi — TCL 43" P6K (43P6K)</title>
 <style>
-  /* ---------- Mobile-first modern product page ---------- */
   :root{
     --bg:#071226;
     --card:#0b2633;
     --muted:#9fb0c4;
-    --accent:#00e6d8;
-    --accent2:#ff8a65;
-    --glass: rgba(255,255,255,0.03);
+    --accent:#00e6d8;       /* cyan */
+    --accent-warm:#ff7a5a;  /* coral (mic color changed from yellow) */
     --txt:#e9f8ff;
     font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
   }
@@ -20,261 +18,283 @@
   html,body{height:100%;margin:0;background:
     radial-gradient(700px 360px at 12% 6%, rgba(0,230,216,0.03), transparent 10%),
     linear-gradient(180deg,var(--bg),#041021); color:var(--txt); -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:980px;margin:8px auto;padding:12px}
 
-  .wrap{max-width:980px;margin:10px auto;padding:14px}
-
-  /* header: logo left, brand name */
-  header{display:flex;gap:12px;align-items:center;justify-content:flex-start;margin-bottom:12px}
-  .logo-box{width:96px;height:72px;border-radius:12px;overflow:hidden;background:#fff;padding:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(2,8,18,0.6)}
+  /* header: left aligned logo + brand */
+  header{display:flex;gap:12px;align-items:center}
+  .logo-box{width:110px;height:68px;border-radius:12px;overflow:hidden;background:#fff;padding:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 36px rgba(2,8,18,0.6)}
   .logo-box img{width:100%;height:100%;object-fit:contain}
-  .brand{
-    display:flex;flex-direction:column;justify-content:center;
-  }
+  .brand{display:flex;flex-direction:column}
   .brand .name{font-weight:800;font-size:18px}
   .brand .sub{font-size:12px;color:var(--muted);margin-top:4px}
 
-  /* language toggle */
-  .lang-toggle{margin-left:auto;display:flex;gap:8px}
+  /* language */
+  .lang-toggle{margin-left:auto;display:flex;gap:8px;z-index:1200}
   .lang-btn{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:800}
   .lang-btn.active{background:linear-gradient(90deg,var(--accent),#6df0c8);color:#022426;box-shadow:0 14px 40px rgba(0,230,216,0.06)}
 
   /* card */
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:16px;padding:12px;box-shadow:0 24px 60px rgba(2,8,18,0.6)}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:14px;padding:12px;box-shadow:0 24px 60px rgba(2,8,18,0.6);position:relative}
 
-  /* product title row */
-  .title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-  .title-left{flex:1}
-  .product-name{font-weight:900;font-size:20px}
+  .title-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .product-name{font-weight:900;font-size:18px}
   .product-size{color:var(--muted);font-size:13px;margin-top:4px}
+  .price{font-weight:900;color:var(--accent-warm);background:linear-gradient(90deg, rgba(255,122,90,0.08), rgba(0,230,216,0.02));padding:6px 10px;border-radius:10px}
 
   /* wide carousel */
-  .carousel{position:relative;border-radius:12px;overflow:hidden;background:#000}
+  .carousel{position:relative;border-radius:12px;overflow:hidden;background:#000;margin-bottom:8px}
   .slides{display:flex;transition:transform .36s cubic-bezier(.2,.9,.2,1);will-change:transform}
-  .slides img{width:100%;height:260px;object-fit:cover;flex-shrink:0}
-  @media(min-width:640px){ .slides img{height:340px} }
-  .dot-row{display:flex;gap:8px;padding:10px}
+  .slides img{width:100%;height:240px;object-fit:cover;flex-shrink:0}
+  @media(min-width:640px){ .slides img{height:320px} }
+
+  /* dots/prev-next */
+  .dots{display:flex;gap:8px;padding:10px;justify-content:center}
   .dot{width:9px;height:9px;border-radius:8px;background:rgba(255,255,255,0.06)}
-  .dot.active{background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 10px 30px rgba(0,230,216,0.08)}
+  .dot.active{background:linear-gradient(90deg,var(--accent),var(--accent-warm));box-shadow:0 10px 26px rgba(0,230,216,0.07)}
 
-  /* prev/next overlay */
-  .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.36);border-radius:10px;padding:8px;border:0;color:var(--txt);cursor:pointer}
-  .nav.prev{left:12px}
-  .nav.next{right:12px}
-  .nav:active{transform:translateY(-50%) scale(.98)}
+  .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(2,6,12,0.5);border-radius:10px;padding:8px;border:0;color:var(--txt);cursor:pointer;z-index:1300}
+  .nav.prev{left:10px}
+  .nav.next{right:10px}
 
-  /* assistant + controls */
-  .controls{display:flex;gap:10px;align-items:center;margin-top:12px}
-  .btn{
-    padding:10px 12px;border-radius:12px;border:0;cursor:pointer;font-weight:800;
-    background:linear-gradient(90deg,var(--accent),#6df0c8);color:#022426;
-    box-shadow:0 12px 36px rgba(0,230,216,0.06)
-  }
+  /* controls & quick prompts */
+  .controls{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .btn{padding:10px 12px;border-radius:12px;border:0;cursor:pointer;font-weight:800;background:linear-gradient(90deg,var(--accent),#6df0c8);color:#022426;box-shadow:0 12px 36px rgba(0,230,216,0.06)}
   .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);box-shadow:none}
-
-  /* floating FABs */
-  .fab{position:fixed;right:16px;bottom:18px;z-index:1200;display:flex;flex-direction:column;gap:12px}
-  .fab button{width:56px;height:56px;border-radius:14px;border:0;background:linear-gradient(180deg,var(--accent),#6df0c8);color:#022426;font-size:22px;cursor:pointer;box-shadow:0 14px 40px rgba(0,230,216,0.12)}
-  .fab button.voice{background:linear-gradient(180deg,var(--accent2),#ffb18b);color:#081217}
-
-  /* chat panel (hidden until opened) */
-  .panel{position:fixed;right:16px;bottom:88px;width:92vw;max-width:360px;height:62vh;background:linear-gradient(180deg,#071726,#03202b);border-radius:12px;padding:8px;box-shadow:0 28px 80px rgba(2,8,18,0.7);display:none;flex-direction:column;z-index:1250}
-  .panel header{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.03)}
-  .panel .h-title{font-weight:800}
-  .panel .h-sub{font-size:12px;color:var(--muted)}
-  .panel .messages{flex:1;overflow:auto;padding:10px;display:flex;flex-direction:column;gap:10px}
-  .bubble{max-width:78%;padding:10px 12px;border-radius:12px;line-height:1.35}
-  .bubble.user{align-self:flex-end;background:linear-gradient(90deg,var(--accent2),#ffb085);color:#081217;font-weight:800}
-  .bubble.bot{align-self:flex-start;background:rgba(255,255,255,0.03);color:var(--txt)}
-  .panel .composer{display:flex;gap:8px;padding:8px;border-top:1px solid rgba(255,255,255,0.03)}
-  .panel input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--txt)}
 
   /* features grid */
   .features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
-  .features img{width:100%;height:110px;object-fit:cover;border-radius:10px;box-shadow:0 12px 36px rgba(2,8,18,0.5)}
+  .features img{width:100%;height:120px;object-fit:cover;border-radius:10px;box-shadow:0 12px 36px rgba(2,8,18,0.5);cursor:zoom-in}
 
-  footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+  footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
+
+/* Floating buttons (ensures on top and tappable) */
+.fab-wrap{position:fixed;right:14px;bottom:14px;display:flex;flex-direction:column;gap:12px;z-index:1400}
+.fab{width:56px;height:56px;border-radius:14px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 14px 40px rgba(0,0,0,0.3)}
+.fab.chat{background:linear-gradient(180deg,var(--accent),#6df0c8);color:#022426}
+.fab.voice{background:linear-gradient(180deg,var(--accent-warm),#ffb085);color:#081217}
+
+/* panel (hidden until opened) */
+.panel{position:fixed;right:14px;bottom:86px;width:92vw;max-width:380px;height:62vh;background:linear-gradient(180deg,#071726,#03202b);border-radius:12px;padding:8px;box-shadow:0 28px 80px rgba(2,8,18,0.7);display:none;flex-direction:column;z-index:1450}
+.panel header{display:flex;align-items:center;justify-content:space-between;padding:8px 6px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.panel .h-title{font-weight:800}
+.panel .h-sub{font-size:12px;color:var(--muted)}
+.panel .messages{flex:1;padding:10px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.bubble{max-width:78%;padding:10px 12px;border-radius:12px;line-height:1.35;word-break:break-word}
+.bubble.user{align-self:flex-end;background:linear-gradient(90deg,var(--accent-warm),#ffb085);color:#081217}
+.bubble.bot{align-self:flex-start;background:rgba(255,255,255,0.03);color:var(--txt)}
+.panel .composer{display:flex;gap:8px;padding:8px;border-top:1px solid rgba(255,255,255,0.03)}
+.panel input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--txt)}
+.panel button.icon{padding:8px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#6df0c8);color:#022426;cursor:pointer}
+
+/* ensure clickable elements sit above carousel and others */
+.nav, .fab-wrap, .panel, .lang-toggle, .controls .btn { -webkit-tap-highlight-color: transparent; }
+/* small adjustments */
+@media(max-width:480px){
+  .logo-box{width:86px;height:56px;padding:6px}
+  .slides img{height:200px}
+  .features img{height:96px}
+}
 </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="logo-box"><img id="logo" src="assets/ktpl-new-logo.png" alt="Kalindi logo"></div>
+      <div class="logo-box"><img id="logoImg" alt="Kalindi logo"></div>
       <div class="brand">
         <div class="name">Kalindi Tradelinks Pvt Ltd</div>
         <div class="sub">TV • Electronics • Showroom</div>
       </div>
 
-      <div style="margin-left:auto" class="lang-toggle">
+      <div class="lang-toggle" style="margin-left:auto">
         <button id="langEn" class="lang-btn active">English</button>
         <button id="langGu" class="lang-btn">ગુજરાતી</button>
       </div>
     </header>
 
-    <main class="card" role="main" aria-labelledby="prodTitle">
+    <main class="card" aria-labelledby="prodTitle">
       <div class="title-row">
-        <div class="title-left">
+        <div>
           <div id="prodTitle" class="product-name">TCL 43" P6K 4K HDR TV — 43P6K</div>
           <div id="prodSize" class="product-size">43 inch (109 cm)</div>
         </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <div style="font-weight:900;color:var(--accent);">₹35,000</div>
+        <div style="margin-left:auto">
+          <div id="price" class="price">₹35,000</div>
         </div>
       </div>
 
-      <!-- Carousel -->
       <div class="carousel" id="carousel">
-        <button class="nav prev" id="prevBtn" aria-label="Previous image">◀</button>
-        <div class="slides" id="slides" aria-live="polite"></div>
-        <button class="nav next" id="nextBtn" aria-label="Next image">▶</button>
+        <button class="nav prev" id="prevBtn" aria-label="Previous">◀</button>
+        <div class="slides" id="slides" aria-live="polite" role="img"></div>
+        <button class="nav next" id="nextBtn" aria-label="Next">▶</button>
       </div>
-      <div class="dot-row" id="dots"></div>
+      <div class="dots" id="dots" aria-hidden="true"></div>
 
-      <!-- Controls -->
-      <div class="controls">
+      <div class="controls" id="controls">
         <button id="openChat" class="btn secondary">Open Chat</button>
         <button id="openVoice" class="btn">Voice Assistant</button>
       </div>
 
-      <!-- Features / AI / Dimension images -->
-      <div class="features" id="features">
-        <!-- images inserted by JS -->
-      </div>
+      <div class="features" id="features"></div>
     </main>
 
     <footer>© Kalindi Tradelinks Pvt Ltd</footer>
   </div>
 
-  <!-- Floating Buttons -->
-  <div class="fab" aria-hidden="false">
-    <button id="fabVoice" class="voice" title="Voice Assistant">🎙️</button>
-    <button id="fabChat" title="Chat">💬</button>
+  <!-- Floating action buttons -->
+  <div class="fab-wrap" aria-hidden="false">
+    <button id="fabVoice" class="fab voice" title="Voice assistant">🎙️</button>
+    <button id="fabChat" class="fab chat" title="Chat">💬</button>
   </div>
 
-  <!-- Chat / Voice Panel (hidden until opened) -->
+  <!-- Chat / Voice panel -->
   <div class="panel" id="panel" role="dialog" aria-hidden="true">
     <header>
       <div>
         <div class="h-title" id="panelTitle">Product Assistant</div>
-        <div class="h-sub" id="panelSub">Tap mic to speak or type your question</div>
+        <div class="h-sub" id="panelSub">Tap mic or type your question</div>
       </div>
       <div><button id="closePanel" style="background:transparent;border:0;color:var(--muted);cursor:pointer">✕</button></div>
     </header>
     <div class="messages" id="messages" aria-live="polite"></div>
     <div class="composer">
-      <input id="inputBox" placeholder="Type your question..." />
-      <button id="sendBtn" class="btn">Send</button>
-      <button id="micBtn" class="btn voice">🎤</button>
+      <input id="inputBox" placeholder="Type your question..." aria-label="Type your question">
+      <button id="sendBtn" class="icon">Send</button>
+      <button id="micBtn" class="icon">🎤</button>
     </div>
   </div>
 
 <script>
-/* ---------------- ASSETS (change names if needed) ---------------- */
-const ASSETS = {
-  logo: 'assets/ktpl-new-logo.png',
-  gallery: ['assets/wm1.jpg','assets/wm2.jpg','assets/wm3.jpg','assets/wm4.jpg','assets/wm5.jpg'],
-  features: ['assets/description1.webp','assets/description2.webp','assets/front2.webp','assets/proccessor.webp','assets/back4.webp','assets/side1.webp']
+/* ---------------- robust asset loader: tries multiple extensions for each base name ---------------- */
+const imgExtCandidates = ['.avif','.webp','.jpg','.jpeg','.png'];
+function tryLoadFirst(basePaths, imgEl){
+  // basePaths: array of base path strings without extension, e.g. ['assets/wm1','assets/wm1.avif'] okay
+  const queue = [];
+  basePaths.forEach(bp=>{
+    if(bp.includes('.')) queue.push(bp);
+    else imgExtCandidates.forEach(ext=> queue.push(bp + ext));
+  });
+  let idx=0;
+  function tryNext(){
+    if(idx>=queue.length){ imgEl.style.display='none'; return; }
+    const src = queue[idx++]; const tester = new Image();
+    tester.onload = ()=> { imgEl.src = src; };
+    tester.onerror = ()=> tryNext();
+    tester.src = src;
+  }
+  tryNext();
+}
+
+/* ---------------- ASSET base names (edit if you renamed files) ---------------- */
+const ASSET_BASE = {
+  logoCandidates: ['assets/ktpl-new-logo','assets/ktpl new logo','assets/ktpl new logo.png','assets/ktpl-new-logo.png'],
+  galleryBase: ['assets/wm1','assets/wm2','assets/wm3','assets/wm4','assets/wm5'],
+  featureBase: ['assets/description1','assets/description2','assets/front2','assets/proccessor','assets/back4','assets/side1']
 };
 
-/* ---------------- DOM refs ---------------- */
+/* set logo (tries a few common names) */
+const logoImg = document.getElementById('logoImg');
+tryLoadFirst(ASSET_BASE.logoCandidates, logoImg);
+
+/* build gallery using robust loader */
 const slidesEl = document.getElementById('slides');
+ASSET_BASE.galleryBase.forEach(base=>{
+  const img = document.createElement('img'); img.alt = 'product image'; img.loading='lazy';
+  slidesEl.appendChild(img);
+  tryLoadFirst([base], img);
+});
+
+/* build dots */
 const dotsEl = document.getElementById('dots');
+function buildDots(){
+  dotsEl.innerHTML='';
+  for(let i=0;i<slidesEl.children.length;i++){
+    const d = document.createElement('div'); d.className='dot'+(i===0? ' active':'');
+    d.addEventListener('click', ()=>{ current = i; updateSlide(); });
+    dotsEl.appendChild(d);
+  }
+}
+let current = 0;
+function updateSlide(){ slidesEl.style.transform = `translateX(${-current*100}%)`; Array.from(dotsEl.children).forEach((d,i)=>d.classList.toggle('active', i===current)); }
+buildDots();
+
+/* prev/next handlers */
+document.getElementById('prevBtn').addEventListener('click', ()=>{ current = Math.max(0,current-1); updateSlide(); });
+document.getElementById('nextBtn').addEventListener('click', ()=>{ current = Math.min(slidesEl.children.length-1,current+1); updateSlide(); });
+
+/* swipe support (mobile) */
+let startX = null;
+document.getElementById('carousel').addEventListener('touchstart', e => startX = e.changedTouches[0].clientX);
+document.getElementById('carousel').addEventListener('touchend', e => {
+  if(startX===null) return;
+  const dx = e.changedTouches[0].clientX - startX;
+  if(Math.abs(dx) > 40){
+    current = dx < 0 ? Math.min(current+1, slidesEl.children.length-1) : Math.max(current-1, 0);
+    updateSlide();
+  }
+  startX = null;
+});
+
+/* features images */
 const featuresEl = document.getElementById('features');
+ASSET_BASE.featureBase.forEach(base=>{
+  const img = document.createElement('img'); img.alt='feature image'; img.loading='lazy';
+  tryLoadFirst([base], img);
+  featuresEl.appendChild(img);
+});
+
+/* ---------------- language handling ---------------- */
+let lang = 'en';
+const langEnBtn = document.getElementById('langEn'), langGuBtn = document.getElementById('langGu');
+langEnBtn.addEventListener('click', ()=>{ lang='en'; langEnBtn.classList.add('active'); langGuBtn.classList.remove('active'); document.getElementById('panelSub').textContent='Tap mic or type your question'; });
+langGuBtn.addEventListener('click', ()=>{ lang='gu'; langGuBtn.classList.add('active'); langEnBtn.classList.remove('active'); document.getElementById('panelSub').textContent='માઇક દબાવો અથવા લખો'; });
+
+/* ---------------- panel open/close ---------------- */
 const panel = document.getElementById('panel');
+function openPanel(){ panel.style.display='flex'; panel.setAttribute('aria-hidden','false'); setTimeout(()=> inputBox.focus(),120); }
+function closePanel(){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); }
+document.getElementById('openChat').addEventListener('click', openPanel);
+document.getElementById('openVoice').addEventListener('click', ()=>{ openPanel(); setTimeout(()=> micBtn.click(),200); });
+document.getElementById('fabChat').addEventListener('click', openPanel);
+document.getElementById('fabVoice').addEventListener('click', ()=>{ openPanel(); setTimeout(()=> micBtn.click(),200); });
+document.getElementById('closePanel').addEventListener('click', closePanel);
+
+/* ---------------- messages ---------------- */
 const messagesEl = document.getElementById('messages');
 const inputBox = document.getElementById('inputBox');
 const sendBtn = document.getElementById('sendBtn');
 const micBtn = document.getElementById('micBtn');
 
-/* ---------------- language ---------------- */
-let lang = 'en';
-document.getElementById('langEn').addEventListener('click', ()=>{
-  lang='en'; document.getElementById('langEn').classList.add('active'); document.getElementById('langGu').classList.remove('active');
-  document.getElementById('panelSub').textContent = 'Tap mic to speak or type your question';
-});
-document.getElementById('langGu').addEventListener('click', ()=>{
-  lang='gu'; document.getElementById('langGu').classList.add('active'); document.getElementById('langEn').classList.remove('active');
-  document.getElementById('panelSub').textContent = 'માઇક દબાવો અથવા લખો';
-});
-
-/* ---------------- fill gallery ---------------- */
-ASSETS.gallery.forEach(src=>{
-  const img = document.createElement('img'); img.src = src; img.alt = 'product image';
-  img.addEventListener('error', ()=> img.style.display='none');
-  slidesEl.appendChild(img);
-});
-let current = 0;
-function updateSlide(){
-  slidesEl.style.transform = `translateX(${-current*100}%)`;
-  Array.from(dotsEl.children).forEach((d,i)=> d.classList.toggle('active', i===current));
-}
-function buildDots(){
-  dotsEl.innerHTML='';
-  for(let i=0;i<slidesEl.children.length;i++){
-    const d=document.createElement('div'); d.className='dot'+(i===0?' active':'');
-    d.addEventListener('click', ()=>{ current=i; updateSlide(); });
-    dotsEl.appendChild(d);
-  }
-}
-buildDots();
-
-/* prev/next */
-document.getElementById('prevBtn').addEventListener('click', ()=>{ current = Math.max(0,current-1); updateSlide(); });
-document.getElementById('nextBtn').addEventListener('click', ()=>{ current = Math.min(slidesEl.children.length-1,current+1); updateSlide(); });
-
-/* swipe */
-let startX=null;
-document.getElementById('carousel').addEventListener('touchstart', e=> startX=e.changedTouches[0].clientX);
-document.getElementById('carousel').addEventListener('touchend', e=>{
-  if(startX===null) return;
-  const dx = e.changedTouches[0].clientX - startX;
-  if(Math.abs(dx)>40){
-    current = dx<0 ? Math.min(current+1, slidesEl.children.length-1) : Math.max(current-1,0);
-    updateSlide();
-  }
-  startX=null;
-});
-
-/* ---------------- features images ---------------- */
-ASSETS.features.forEach(src=>{
-  const i=document.createElement('img'); i.src=src; i.alt='feature'; i.loading='lazy';
-  featuresEl.appendChild(i);
-});
-
-/* ---------------- panel open/close ---------------- */
-function openPanel(){
-  panel.style.display='flex'; panel.setAttribute('aria-hidden','false');
-}
-function closePanel(){
-  panel.style.display='none'; panel.setAttribute('aria-hidden','true');
-}
-document.getElementById('openChat').addEventListener('click', openPanel);
-document.getElementById('openVoice').addEventListener('click', openPanel);
-document.getElementById('fabChat').addEventListener('click', openPanel);
-document.getElementById('fabVoice').addEventListener('click', openPanel);
-document.getElementById('closePanel').addEventListener('click', closePanel);
-
-/* ---------------- messages utilities ---------------- */
-function addMessage(text, who='bot'){
-  const b=document.createElement('div'); b.className='bubble '+(who==='user'?'user':'bot'); b.textContent=text; messagesEl.appendChild(b);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
+function addBubble(text, who='bot'){
+  const d = document.createElement('div'); d.className = 'bubble ' + (who==='user' ? 'user' : 'bot');
+  d.textContent = text; messagesEl.appendChild(d); messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
-/* ---------------- canned responses (en + gu) ---------------- */
+/* canned prompts (en + gu) */
 const PROMPTS = [
-  { q:/dimension|dimensions|size|height|width|depth/i, en:'Please see the dimensions image below — typical 43\" TV dimensions are approx. W 83.8 cm × H 60.4 cm × D 18.45 cm (with stand).', gu:'માપ માટે નીચે દર્શાવેલી છબી જુઓ — લગભગ W 83.8 cm × H 60.4 cm × D 18.45 cm (સ્ટૅન્ડ સાથે).' },
-  { q:/feature|features|what .* include|what are the features/i, en:'Key features: 4K UHD, HDR10, Google TV, AiPQ processor, Dolby Audio, HDMI 2.1 (gaming friendly), and smart streaming apps.', gu:'મુખ્ય લક્ષણો: 4K UHD, HDR10, Google TV, AiPQ પ્રોસેસર, Dolby Audio, HDMI 2.1 (ગેમિંગ માટે), અને સ્માર્ટ સ્ટ્રીમિંગ એપ્સ.' },
-  { q:/colour|color|available color|available colours|colour available/i, en:'Usually available in black/graphite chassis. Exact color options depend on stock.', gu:'સામાન્ય રીતે બ્લેક/ગ્રાફાઇટ રંગમાં ઉપલબ્ધ. ચોક્કસ રંગ સ્ટોક પર આધાર રાખે છે.' },
-  { q:/game|gaming|is it good for games|input lag/i, en:'Yes — HDMI 2.1, Game Mode and ALLM lower input lag. Native refresh is 60Hz; MEMC helps motion handling.', gu:'હા — HDMI 2.1, ગેમ મોડ અને ALLM ઇનપુટ લેગ ઓછું કરે છે. મૂળ રિફ્રેશ 60Hz છે; MEMC મોશન સાચવવામાં મદદ કરે છે.' },
-  { q:/feedback|review|customer|rating/i, en:'Customer feedback: sharp 4K picture, good value, quiet operation. Some note moderate peak brightness; overall positive reviews.', gu:'ગ્રાહક પ્રતિસાદ: તેજ 4K છબિ, સારો મૂલ્ય, શાંત ચાલન. કેટલાકે મધ્યમ બ્રાઇટનેસ નોંધવી; સામાન્ય રીતે સકારાત્મક.' },
-  { q:/power|watt|power consumption/i, en:'Typical power consumption ~70–110W during operation; standby <0.5W. Exact numbers vary by model/settings.', gu:'સામાન્ય વીજ ઉપભોગ ~70–110W; સ્ટૅન્ડબાય <0.5W. સાચા આંકડા મોડેલ/સેટિંગ પર આધાર રાખે છે.' },
-  { q:/hdr|dolby|dolby audio/i, en:'Supports HDR10; Dolby Audio playback is supported. Dolby Vision is not available on this model.', gu:'HDR10 સપોર્ટ કરે છે; Dolby Audio પ્લેબેક ઉપલબ્ધ છે. Dolby Vision આપત્તિમાં નથી.' },
-  { q:/refresh|rate|hz|120hz/i, en:'Native panel is 60Hz. MEMC provides motion interpolation for smoother motion (motion rate marketed higher).', gu:'મૂળ પેનલ 60Hz છે. MEMC મોશન ઇન્ટરપોલેશન આપે છે જે મોશનને મધુર બનાવે છે.' },
-  { q:/price|cost|how much|₹/rupee/i, en:'This 43\" model is listed at ₹35,000 in our showroom. Final price may vary with offers.', gu:'આ 43\" મોડલની કિંમત ₹35,000 તરીકે સૂચવવામાં આવે છે. ઓફર અનુસાર કિંમત બદલાઈ શકે છે.' }
+  { q:/dimension|dimensions|size|height|width|depth/i, en:'See the dimension images below — approx W 83.8 cm × H 60.4 cm × D 18.45 cm (with stand).', gu:'માપ માટે નીચેનાં છબી જુઓ — લગભગ W 83.8 cm × H 60.4 cm × D 18.45 cm (સ્ટૅન્ડ સાથે).' },
+  { q:/feature|features|what .* include|what are the features/i, en:'Key features: 4K UHD, HDR10, Google TV, AiPQ processor, Dolby Audio, HDMI 2.1 (gaming friendly).', gu:'મુખ્ય લક્ષણો: 4K UHD, HDR10, Google TV, AiPQ પ્રોસેસર, Dolby Audio, HDMI 2.1.' },
+  { q:/colour|color|available color/i, en:'Typically available in black/graphite finish; exact options depend on stock.', gu:'સામાન્ય રીતે બ્લેક/ગ્રાફાઇટ રંગમાં ઉપલબ્ધ. સ્ટોક પર આધાર રાખે છે.' },
+  { q:/game|gaming|is it good for game|input lag/i, en:'Yes — HDMI 2.1, Game Mode and ALLM reduce input lag. Native refresh 60Hz; MEMC helps motion.', gu:'હા — HDMI 2.1, ગેમ મોડ અને ALLM ઇનપુટ લેગ ઘટાડી શકે છે. મૂળ રિફ્રેશ 60Hz છે.' },
+  { q:/feedback|review|customer/i, en:'Customers praise the 4K clarity and value; some note moderate peak brightness.', gu:'ગ્રાહકો 4K કોલિટી અને મૂલ્યને વખાણે છે; કેટલાકે મધ્યમ બ્રાઇટનેસ નોંધ્યો.' },
+  { q:/power|watt|consumption/i, en:'Typical operation ~70–110W; standby <0.5W. Exact depends on model/settings.', gu:'ઉપયોગ વખતે ~70–110W; સ્ટેન્ડબાય <0.5W. મોડેલ પર આધાર.' },
+  { q:/hdr|dolby/i, en:'Supports HDR10; Dolby Audio supported. Dolby Vision not supported on this model.', gu:'HDR10 સપોર્ટ; Dolby Audio ઉપલબ્ધ છે. Dolby Vision ઉપલબ્ધ નથી.' },
+  { q:/refresh|hz|120hz/i, en:'Native refresh is 60Hz. Motion interpolation (MEMC) is present for smoother motion.', gu:'મૂળ રિફ્રેશ 60Hz છે. MEMC વધુ સરસ મોશન માટે છે.' },
+  { q:/price|cost|how much|₹/rupee/i, en:'This 43\" model is priced at ₹35,000 in our showroom. Final price may vary with offers.', gu:'આ 43\" મોડલની કિંમત શોરૂમમાં ₹35,000 છે. ઓફર પ્રમાણે કિંમત બદલાઈ શકે છે.' }
 ];
-function answerFor(text){
-  for(const p of PROMPTS) if(p.q.test(text)) return (lang==='en'?p.en:p.gu);
-  return (lang==='en'?'Sorry, I do not have that exact information. Try asking about price, dimensions, features, colors, gaming, power or HDR.':'માફ કરશો, મારી પાસે તે ચોક્કસ માહિતી નથી. કિંમત, માપ, લક્ષણો, રંગો, ગેમિંગ, વીજ ઉપભોગ અથવા HDR વિશે પુછો.');
+
+function findAnswer(text){
+  for(const p of PROMPTS) if(p.q.test(text)) return (lang==='en' ? p.en : p.gu);
+  return (lang==='en' ? "Sorry — ask about price, dimensions, features, colors, gaming, power or HDR." : "માફ કરશો — કિંમત, માપ, લક્ષણો, રંગો, ગેમિંગ, વીજ ખર્ચ અથવા HDR વિશે પૂછો.");
 }
+
+/* ---------------- input handlers ---------------- */
+sendBtn.addEventListener('click', ()=>{
+  const v = inputBox.value.trim(); if(!v) return; inputBox.value=''; addBubble(v,'user');
+  const ans = findAnswer(v);
+  setTimeout(()=> addBubble(ans,'bot'), 200);
+  speak(ans);
+});
+inputBox.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); sendBtn.click(); } });
 
 /* ---------------- speech synthesis ---------------- */
 function speak(text){
@@ -285,23 +305,19 @@ function speak(text){
   window.speechSynthesis.speak(u);
 }
 
-/* ---------------- tap sound (subtle) ---------------- */
-let audioCtx=null;
+/* ---------------- tap tone ---------------- */
+let audioCtx = null;
 function playTap(){
   try{
     if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-    const now = audioCtx.currentTime;
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.type = 'sine'; o.frequency.setValueAtTime(1200, now);
-    g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(0.12, now+0.002); g.gain.exponentialRampToValueAtTime(0.001, now+0.12);
-    o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.12);
+    const now = audioCtx.currentTime; const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+    o.type='sine'; o.frequency.setValueAtTime(1200, now); g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(0.12, now+0.002);
+    g.gain.exponentialRampToValueAtTime(0.001, now+0.12); o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.12);
   }catch(e){}
 }
 
-/* ---------------- recognition (optional) ---------------- */
-let recognition = null;
-let isListening = false;
+/* ---------------- recognition (start/stop) ---------------- */
+let recognition=null, isListening=false;
 if(window.SpeechRecognition || window.webkitSpeechRecognition){
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   recognition = new SR();
@@ -309,106 +325,69 @@ if(window.SpeechRecognition || window.webkitSpeechRecognition){
   recognition.maxAlternatives = 1;
   recognition.onresult = (e)=>{
     const txt = e.results[0][0].transcript;
-    addMessageUser(txt);
-    const ans = answerFor(txt);
-    setTimeout(()=> addMessageBot(ans), 300);
+    addBubble(txt,'user');
+    const ans = findAnswer(txt);
+    setTimeout(()=> addBubble(ans,'bot'), 200);
     speak(ans);
   };
-  recognition.onend = ()=> { isListening=false; micBtn.style.boxShadow=''; micBtn.style.transform=''; micBtn.textContent='🎤'; }
-  recognition.onerror = (e)=> { isListening=false; micBtn.style.boxShadow=''; micBtn.style.transform=''; micBtn.textContent='🎤'; }
+  recognition.onend = ()=> { isListening=false; micBtn.textContent='🎤'; micBtn.style.transform=''; micBtn.style.boxShadow=''; }
+  recognition.onerror = ()=> { isListening=false; micBtn.textContent='🎤'; micBtn.style.transform=''; micBtn.style.boxShadow=''; }
 }
 
-/* ---------------- UI message helpers ---------------- */
-function addMessageUser(text){ addMessage(text,'user'); }
-function addMessageBot(text){ addMessage(text,'bot'); }
-function addMessage(text,who){
-  addMessageElement(text, who);
-  // also show in small transcript (optional)
-}
-function addMessageElement(text, who){
-  const div = document.createElement('div'); div.className='bubble '+(who==='user'?'user':'bot'); div.textContent=text;
-  messagesEl.appendChild(div); messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
-/* ---------------- send flow ---------------- */
-sendBtn.addEventListener('click', ()=>{
-  const v = inputBox.value.trim(); if(!v) return; inputBox.value=''; addMessageUser(v);
-  const ans = answerFor(v);
-  setTimeout(()=> addMessageBot(ans), 250);
-  speak(ans);
+/* open panel & start recognition if needed */
+document.getElementById('fabVoice').addEventListener('click', ()=>{
+  playTap(); openPanel();
+  setTimeout(()=> { if(recognition){ try{ recognition.lang = (lang==='en'?'en-IN':'gu-IN'); recognition.start(); isListening=true; micBtn.textContent='●'; micBtn.style.transform='scale(1.02)'; micBtn.style.boxShadow='0 8px 28px rgba(255,122,90,0.12)'; }catch(e){ console.warn(e); } } }, 300);
 });
-inputBox.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ e.preventDefault(); sendBtn.click(); } });
+document.getElementById('fabChat').addEventListener('click', ()=>{ playTap(); openPanel(); });
 
-/* ---------------- mic button inside panel ---------------- */
+/* mic control inside panel */
 micBtn.addEventListener('click', ()=>{
   playTap();
-  if(!recognition){ alert('Speech recognition not supported in this browser.'); return; }
+  if(!recognition){ alert(lang==='en' ? 'Speech recognition not supported in this browser.' : 'આ બ્રાઉઝર માં સ્પીચ રેકોગ્નિશન સપોર્ટ નથી.') ; return; }
   if(!isListening){
     try{
-      recognition.lang = (lang==='en'?'en-IN':'gu-IN');
-      recognition.start();
-      isListening=true; micBtn.textContent='●'; micBtn.style.boxShadow='0 8px 30px rgba(255,138,101,0.12)'; micBtn.style.transform='scale(1.04)';
-    }catch(e){ console.error(e); isListening=false }
+      recognition.lang = (lang==='en' ? 'en-IN' : 'gu-IN'); recognition.start(); isListening=true; micBtn.textContent='●'; micBtn.style.transform='scale(1.02)'; micBtn.style.boxShadow='0 8px 28px rgba(255,122,90,0.12)';
+    }catch(e){ isListening=false; }
   } else {
-    recognition.stop();
-    isListening=false; micBtn.textContent='🎤'; micBtn.style.boxShadow=''; micBtn.style.transform='';
+    recognition.stop(); isListening=false; micBtn.textContent='🎤'; micBtn.style.transform=''; micBtn.style.boxShadow='';
   }
 });
 
-/* ---------------- FABs open panel ---------------- */
-document.getElementById('fabChat').addEventListener('click', ()=>{ playTap(); openPanel(); });
-document.getElementById('fabVoice').addEventListener('click', ()=>{ playTap(); openPanel(); setTimeout(()=> micBtn.click(),300); });
-
-document.getElementById('openChat').addEventListener('click', ()=> openPanel());
-document.getElementById('openVoice').addEventListener('click', ()=> { openPanel(); setTimeout(()=> micBtn.click(),300); });
-
-function openPanel(){
-  panel.style.display='flex';
-  panel.setAttribute('aria-hidden','false');
-  inputBox.focus();
-}
-document.getElementById('closePanel').addEventListener('click', ()=> closePanel());
-function closePanel(){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); }
-
-/* ---------------- quick sample prompts as buttons (optional) --------------- */
-/* Add a few canned chat bubbles the user can tap for quick questions */
-const quicks = ['Features','Dimensions','Colors','Gaming','Price'];
-quicks.forEach(q=>{
-  const btn = document.createElement('button'); btn.className='btn secondary'; btn.textContent=q;
-  btn.style.marginRight='8px'; btn.style.marginTop='8px'; btn.addEventListener('click', ()=>{
-    const text = q.toLowerCase();
-    addMessageUser(q);
-    const ans = answerFor(text);
-    setTimeout(()=> addMessageBot(ans),200); speak(ans);
-  });
-  document.querySelector('.controls').appendChild(btn);
+/* quick prompts buttons (small samples in controls) */
+['Features','Dimensions','Colors','Gaming','Price'].forEach(label=>{
+  const b = document.createElement('button'); b.className='btn secondary'; b.textContent=label;
+  b.addEventListener('click', ()=>{ addBubble(label,'user'); const ans = findAnswer(label); setTimeout(()=> addBubble(ans,'bot'),200); speak(ans); });
+  document.getElementById('controls').appendChild(b);
 });
 
-/* ---------------- init messages ---------------- */
-addMessageBot(lang==='en' ? 'Hello! Tap mic or type to ask about price, features, dimensions, colours, gaming or power.' : 'હેલો! માઈક દબાવો અથવા લખો અને કિંમત, ફીચર્સ, માપ, રંગો અથવા વીજ કરખાચ વિશે પૂછો.');
-
-/* ---------------- ensure logo path exists ---------------- */
-document.getElementById('logo').src = ASSETS.logo;
-
-/* ---------------- small accessibility tweaks: focus on input when panel opens ---------------- */
-panel.addEventListener('transitionend', ()=> inputBox.focus());
-
-/* ---------------- simple auto-advance behavior (optional) ---------------- */
-let autoTimer = setInterval(()=>{ current = (current+1) % slidesEl.children.length; updateSlide(); }, 4500);
-
-/* ---------------- small helper: updateSlide exists in earlier scope? create here ---------------- */
-function updateSlide(){ slidesEl.style.transform = `translateX(${ -current * 100 }%)`; Array.from(dotsEl.children).forEach((d,i)=>d.classList.toggle('active', i===current)); }
-
-/* ---------------- build dots after images loaded ---------------- */
-function buildDots(){
-  dotsEl.innerHTML=''; for(let i=0;i<slidesEl.children.length;i++){
-    const d=document.createElement('div'); d.className='dot'+(i===0?' active':''); d.addEventListener('click', ()=>{ current=i; updateSlide(); });
-    dotsEl.appendChild(d);
-  }
+/* helper to add bubbles (public) */
+function addBubble(text, who='bot'){ addBubbleElement(text, who); }
+function addBubbleElement(text, who){
+  const el = document.createElement('div'); el.className = 'bubble ' + (who==='user' ? 'user' : 'bot'); el.textContent = text;
+  messagesEl.appendChild(el); messagesEl.scrollTop = messagesEl.scrollHeight;
 }
-buildDots();
 
-/* ---------------- done ---------------- */
+/* init: greeting */
+setTimeout(()=> addBubbleElement(lang==='en' ? 'Hello — ask about price, features, dimensions, colors or gaming.' : 'હેલો — કિંમત, લક્ષણો, માપ અથવા ગેમિંગ વિશે પૂછો.'), 600);
+
+/* build dots and start auto-rotate safely (images may be loaded async) */
+function rebuildDotsWhenReady(){
+  if(slidesEl.children.length === 0) return;
+  buildDots();
+  clearInterval(autoRotate);
+  autoRotate = setInterval(()=>{ current = (current+1) % slidesEl.children.length; updateSlide(); }, 4500);
+}
+let autoRotate = setInterval(()=>{ if(slidesEl.children.length) { current = (current+1) % slidesEl.children.length; updateSlide(); } }, 4500);
+
+/* attempt to rebuild dots after a short delay (gives loader time) */
+setTimeout(()=>{ buildDots(); }, 300);
+
+/* ensure clickable elements are on top (touch) */
+['fabVoice','fabChat','openChat','openVoice','prevBtn','nextBtn','micBtn','sendBtn','langEn','langGu'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el) el.style.touchAction = 'manipulation';
+});
 </script>
 </body>
 </html>

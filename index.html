@@ -9,7 +9,7 @@
     --bg:#071226;
     --muted:#9fb0c4;
     --accent:#00e6d8;
-    --accentWarm:#ff7a5a; /* coral mic color */
+    --accentWarm:#ff6b57; /* coral for mic */
     --txt:#e9f8ff;
     font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
   }
@@ -28,7 +28,6 @@
   .lang-btn{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:800;touch-action:manipulation}
   .lang-btn.active{background:linear-gradient(90deg,var(--accent),#6df0c8);color:#022426}
 
-  /* card */
   .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));border-radius:14px;padding:12px;box-shadow:0 24px 60px rgba(2,8,18,0.6);position:relative}
 
   .title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
@@ -36,7 +35,6 @@
   .product-size{color:var(--muted);font-size:13px;margin-top:4px}
   .price{font-weight:900;color:var(--accentWarm);background:linear-gradient(90deg, rgba(255,122,90,0.08), rgba(0,230,216,0.02));padding:6px 10px;border-radius:10px}
 
-  /* carousel */
   .carousel{position:relative;border-radius:12px;overflow:hidden;background:#000;margin-bottom:10px}
   .slides{display:flex;transition:transform .36s cubic-bezier(.2,.9,.2,1);will-change:transform}
   .slides img{width:100%;height:260px;object-fit:cover;flex-shrink:0;display:block}
@@ -50,43 +48,35 @@
   .nav-btn.prev{left:10px}
   .nav-btn.next{right:10px}
 
-  /* controls */
   .controls{display:flex;gap:8px;align-items:center;margin-top:6px;flex-wrap:wrap}
   .btn{padding:10px 12px;border-radius:12px;border:0;cursor:pointer;font-weight:800;background:linear-gradient(90deg,var(--accent),#6df0c8);color:#022426;touch-action:manipulation}
   .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
 
-  /* features grid */
   .features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
   .features img{width:100%;height:110px;object-fit:cover;border-radius:10px;box-shadow:0 12px 36px rgba(2,8,18,0.5);cursor:zoom-in;display:block}
 
   footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px}
 
-/* Floating action buttons */
-.fab-wrap{position:fixed;right:14px;bottom:14px;display:flex;flex-direction:column;gap:12px;z-index:4000}
-.fab{width:56px;height:56px;border-radius:14px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 14px 40px rgba(0,0,0,0.3);touch-action:manipulation}
-.fab.chat{background:linear-gradient(180deg,var(--accent),#6df0c8);color:#022426}
-.fab.voice{background:linear-gradient(180deg,var(--accentWarm),#ffb085);color:#081217}
+  .fab-wrap{position:fixed;right:14px;bottom:14px;display:flex;flex-direction:column;gap:12px;z-index:4000}
+  .fab{width:56px;height:56px;border-radius:14px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 14px 40px rgba(0,0,0,0.3);touch-action:manipulation}
+  .fab.chat{background:linear-gradient(180deg,var(--accent),#6df0c8);color:#022426}
+  .fab.voice{background:linear-gradient(180deg,var(--accentWarm),#ffb085);color:#081217}
 
-/* panel */
-.panel{position:fixed;right:14px;bottom:86px;width:92vw;max-width:380px;height:62vh;background:linear-gradient(180deg,#071726,#03202b);border-radius:12px;padding:8px;box-shadow:0 28px 80px rgba(2,8,18,0.7);display:none;flex-direction:column;z-index:4500}
-.panel header{display:flex;align-items:center;justify-content:space-between;padding:8px 6px;border-bottom:1px solid rgba(255,255,255,0.03)}
-.panel .h-title{font-weight:800}
-.panel .h-sub{font-size:12px;color:var(--muted)}
-.panel .messages{flex:1;padding:10px;overflow:auto;display:flex;flex-direction:column;gap:8px}
-.bubble{max-width:78%;padding:10px 12px;border-radius:12px;line-height:1.35;word-break:break-word}
-.bubble.user{align-self:flex-end;background:linear-gradient(90deg,var(--accentWarm),#ffb085);color:#081217}
-.bubble.bot{align-self:flex-start;background:rgba(255,255,255,0.03);color:var(--txt)}
-.panel .composer{display:flex;gap:8px;padding:8px;border-top:1px solid rgba(255,255,255,0.03)}
-.panel input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--txt);outline:none}
-
-/* ensure clickable elements are on top of carousel */
-.nav-btn, .fab-wrap, .panel, .lang-toggle, .controls .btn { -webkit-tap-highlight-color: transparent; }
-
-@media(max-width:480px){
-  .logo-box{width:90px;height:56px;padding:6px}
-  .slides img{height:200px}
-  .features img{height:96px}
-}
+  .panel{position:fixed;right:14px;bottom:86px;width:92vw;max-width:380px;height:62vh;background:linear-gradient(180deg,#071726,#03202b);border-radius:12px;padding:8px;box-shadow:0 28px 80px rgba(2,8,18,0.7);display:none;flex-direction:column;z-index:4500}
+  .panel header{display:flex;align-items:center;justify-content:space-between;padding:8px 6px;border-bottom:1px solid rgba(255,255,255,0.03)}
+  .panel .h-title{font-weight:800}
+  .panel .h-sub{font-size:12px;color:var(--muted)}
+  .panel .messages{flex:1;padding:10px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+  .bubble{max-width:78%;padding:10px 12px;border-radius:12px;line-height:1.35;word-break:break-word}
+  .bubble.user{align-self:flex-end;background:linear-gradient(90deg,var(--accentWarm),#ffb085);color:#081217}
+  .bubble.bot{align-self:flex-start;background:rgba(255,255,255,0.03);color:var(--txt)}
+  .panel .composer{display:flex;gap:8px;padding:8px;border-top:1px solid rgba(255,255,255,0.03)}
+  .panel input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--txt);outline:none}
+  @media(max-width:480px){
+    .logo-box{width:90px;height:56px;padding:6px}
+    .slides img{height:200px}
+    .features img{height:96px}
+  }
 </style>
 </head>
 <body>
@@ -133,13 +123,11 @@
     <footer>© Kalindi Tradelinks Pvt Ltd</footer>
   </div>
 
-  <!-- Floating action buttons -->
   <div class="fab-wrap" aria-hidden="false">
     <button id="fabVoice" class="fab voice" title="Voice assistant">🎙️</button>
     <button id="fabChat" class="fab chat" title="Chat">💬</button>
   </div>
 
-  <!-- Chat / Voice panel -->
   <div class="panel" id="panel" role="dialog" aria-hidden="true">
     <header>
       <div>
@@ -157,189 +145,205 @@
   </div>
 
 <script>
-/* ---------------- image loader that tries common extensions ---------------- */
-const exts = ['.avif','.webp','.jpg','.jpeg','.png'];
-function loadFirst(srcBases, imgEl){
-  const queue = [];
-  srcBases.forEach(b=>{
-    if(/\.[a-zA-Z]{2,4}$/.test(b)) queue.push(b);
-    else exts.forEach(e=> queue.push(b + e));
+document.addEventListener('DOMContentLoaded', function(){
+  // Safe helper to try a list of candidate urls and set image to first that loads
+  function setImageFromCandidates(imgEl, candidates){
+    let i = 0;
+    function tryNext(){
+      if(i >= candidates.length){ imgEl.style.display = 'none'; return; }
+      const url = candidates[i++];
+      const t = new Image();
+      t.onload = function(){ imgEl.src = url; };
+      t.onerror = tryNext;
+      t.src = url;
+    }
+    tryNext();
+  }
+
+  // Candidate sets (you can edit these to match actual filenames)
+  const logoCandidates = ['assets/ktpl new logo.png','assets/ktpl-new-logo.png','assets/ktpl-new-logo.png','assets/ktpl-new-logo.jpg','assets/ktpl-new-logo.webp'];
+  const galleryBases = ['assets/wm1','assets/wm2','assets/wm3','assets/wm4','assets/wm5'];
+  const extensions = ['.avif','.webp','.jpg','.jpeg','.png'];
+
+  // load logo
+  const logoImg = document.getElementById('logoImg');
+  setImageFromCandidates(logoImg, logoCandidates);
+
+  // populate slides, try common extensions for each base
+  const slidesEl = document.getElementById('slides');
+  galleryBases.forEach(base=>{
+    const img = document.createElement('img'); img.alt='product image'; img.loading='lazy';
+    slidesEl.appendChild(img);
+    const cands = (extensions.map(e=> base + e )).concat([base + '.jpg', base + '.png']);
+    setImageFromCandidates(img, cands);
   });
-  let i=0;
-  function tryOne(){
-    if(i>=queue.length){ imgEl.style.display='none'; return; }
-    const s = queue[i++];
-    const tester = new Image();
-    tester.onload = ()=> { imgEl.src = s; };
-    tester.onerror = tryOne;
-    tester.src = s;
+
+  // dots
+  const dotsEl = document.getElementById('dots');
+  function buildDots(){
+    dotsEl.innerHTML = '';
+    for(let i=0;i<slidesEl.children.length;i++){
+      const d = document.createElement('div'); d.className = 'dot' + (i===0 ? ' active' : '');
+      d.style.cursor = 'pointer';
+      d.addEventListener('click', function(){ idx = i; updateSlide(); });
+      dotsEl.appendChild(d);
+    }
   }
-  tryOne();
-}
 
-/* ---------------- asset names (edit if different) ---------------- */
-const ASSETS = {
-  logoCandidates: ['assets/ktpl-new-logo','assets/ktpl new logo','assets/ktpl-new-logo.png','assets/ktpl new logo.png'],
-  galleryBases: ['assets/wm1','assets/wm2','assets/wm3','assets/wm4','assets/wm5'],
-  featureBases: ['assets/description1','assets/description2','assets/front2','assets/proccessor','assets/back4','assets/side1']
-};
+  // features
+  const featureBases = ['assets/description1','assets/description2','assets/front2','assets/proccessor','assets/back4','assets/side1'];
+  const featuresEl = document.getElementById('features');
+  featureBases.forEach(base=>{
+    const img = document.createElement('img'); img.alt='feature'; img.loading='lazy';
+    featuresEl.appendChild(img);
+    const cands = extensions.map(e=> base + e).concat([base + '.jpg', base + '.png']);
+    setImageFromCandidates(img, cands);
+  });
 
-/* set logo (tries names) */
-const logoEl = document.getElementById('logoImg');
-loadFirst(ASSETS.logoCandidates, logoEl);
+  // slider logic
+  let idx = 0;
+  function updateSlide(){ slidesEl.style.transform = `translateX(${-idx * 100}%)`; Array.from(dotsEl.children).forEach((d,i)=> d.classList.toggle('active', i===idx)); }
+  document.getElementById('prevBtn').addEventListener('click', function(){ idx = Math.max(0, idx-1); updateSlide(); });
+  document.getElementById('nextBtn').addEventListener('click', function(){ idx = Math.min(slidesEl.children.length-1, idx+1); updateSlide(); });
 
-/* build slides */
-const slidesEl = document.getElementById('slides');
-ASSETS.galleryBases.forEach(base=>{
-  const img = document.createElement('img'); img.alt='product image'; img.loading='lazy';
-  slidesEl.appendChild(img);
-  loadFirst([base], img);
-});
+  // build dots after small delay to allow images to attach
+  setTimeout(function(){ buildDots(); updateSlide(); }, 300);
 
-/* build dots */
-const dotsEl = document.getElementById('dots');
-function buildDots(){
-  dotsEl.innerHTML='';
-  for(let i=0;i<slidesEl.children.length;i++){
-    const d = document.createElement('div'); d.className = 'dot' + (i===0?' active':'');
-    d.style.cursor='pointer';
-    d.addEventListener('click', ()=>{ idx = i; updateSlide(); });
-    dotsEl.appendChild(d);
+  // swipe support
+  let startX = null;
+  const carousel = document.getElementById('carousel');
+  carousel.addEventListener('touchstart', function(e){ startX = e.changedTouches[0].clientX; }, {passive:true});
+  carousel.addEventListener('touchend', function(e){
+    if(startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 40){
+      idx = dx < 0 ? Math.min(idx+1, slidesEl.children.length-1) : Math.max(idx-1, 0);
+      updateSlide();
+    }
+    startX = null;
+  }, {passive:true});
+
+  // language toggle
+  let lang = 'en';
+  const langEn = document.getElementById('langEn'), langGu = document.getElementById('langGu');
+  langEn.addEventListener('click', function(){ lang = 'en'; langEn.classList.add('active'); langGu.classList.remove('active'); document.getElementById('panelSub').textContent = 'Tap mic or type your question'; });
+  langGu.addEventListener('click', function(){ lang = 'gu'; langGu.classList.add('active'); langEn.classList.remove('active'); document.getElementById('panelSub').textContent = 'માઇક દબાવો અથવા લખો'; });
+
+  // panel, messages
+  const panel = document.getElementById('panel');
+  const messagesEl = document.getElementById('messages');
+  const inputBox = document.getElementById('inputBox');
+  const sendBtn = document.getElementById('sendBtn');
+  const micBtn = document.getElementById('micBtn');
+
+  function openPanel(){ panel.style.display = 'flex'; panel.setAttribute('aria-hidden','false'); setTimeout(()=> inputBox.focus(),120); }
+  function closePanel(){ panel.style.display = 'none'; panel.setAttribute('aria-hidden','true'); }
+
+  document.getElementById('openChat').addEventListener('click', openPanel);
+  document.getElementById('openVoice').addEventListener('click', function(){ openPanel(); setTimeout(()=> micBtn.click(), 220); });
+  document.getElementById('fabChat').addEventListener('click', openPanel);
+  document.getElementById('fabVoice').addEventListener('click', function(){ openPanel(); setTimeout(()=> micBtn.click(), 220); });
+  document.getElementById('closePanel').addEventListener('click', closePanel);
+
+  function pushMessage(text, who='bot'){
+    const el = document.createElement('div'); el.className = 'bubble ' + (who==='user' ? 'user' : 'bot'); el.textContent = text;
+    messagesEl.appendChild(el); messagesEl.scrollTop = messagesEl.scrollHeight;
   }
-}
 
-/* slide controls */
-let idx = 0;
-function updateSlide(){ slidesEl.style.transform = `translateX(${-idx*100}%)`; Array.from(dotsEl.children).forEach((d,i)=> d.classList.toggle('active', i===idx)); }
-document.getElementById('prevBtn').addEventListener('click', ()=>{ idx = Math.max(0, idx-1); updateSlide(); });
-document.getElementById('nextBtn').addEventListener('click', ()=>{ idx = Math.min(slidesEl.children.length-1, idx+1); updateSlide(); });
+  const PROMPTS = [
+    { q:/dimension|dimensions|size|height|width|depth/i, en:'Please see the dimension images below — approx W 83.8 cm × H 60.4 cm × D 18.45 cm (with stand).', gu:'માપ માટેની છબી જુઓ — લગભગ W 83.8 cm × H 60.4 cm × D 18.45 cm (સ્ટૅન્ડ સાથે).' },
+    { q:/feature|features|what .* include|what are the features/i, en:'Key features: 4K UHD, HDR10, Google TV, AiPQ processor, Dolby Audio, HDMI 2.1 (gaming friendly).', gu:'મુખ્ય લક્ષણો: 4K UHD, HDR10, Google TV, AiPQ પ્રોસેસર, Dolby Audio, HDMI 2.1.' },
+    { q:/colour|color|available color/i, en:'Typically available in black/graphite finish; exact options depend on stock.', gu:'સામાન્ય રીતે બ્લેક/ગ્રાફાઇટ રંગમાં ઉપલબ્ધ. સ્ટોક પર આધાર.' },
+    { q:/game|gaming|is it good for game|input lag/i, en:'Yes — HDMI 2.1, Game Mode and ALLM reduce input lag. Native refresh 60Hz; MEMC helps motion.', gu:'હા — HDMI 2.1 અને ગેમ મોડ ઇનપુટ લેગ ઘટાડી શકે છે. મૂળ રિફ્રેશ 60Hz છે.' },
+    { q:/feedback|review|customer/i, en:'Customer feedback: sharp 4K picture and good value; some note moderate peak brightness.', gu:'ગ્રાહક પ્રતિસાદ: તેજ 4K છબિ અને સારો મૂલ્ય; કેટલાકે મધ્યમ પીક બ્રાઇટનેસ નોંધ્યો.' },
+    { q:/power|watt|consumption/i, en:'Typical power consumption ~70–110W during operation; standby <0.5W.', gu:'ઉપયોગ દરમિયાન ~70–110W; સ્ટેન્ડબાયમાં <0.5W.' },
+    { q:/hdr|dolby/i, en:'Supports HDR10; Dolby Audio supported. Dolby Vision not supported on this model.', gu:'HDR10 સપોર્ટ; Dolby Audio ઉપલબ્ધ છે. Dolby Vision નથી.' },
+    { q:/refresh|hz|120hz/i, en:'Native refresh is 60Hz. MEMC helps motion.', gu:'મૂળ રિફ્રેશ 60Hz છે. MEMC મોશન સહાય કરે છે.' },
+    { q:/price|cost|how much|₹/rupee/i, en:'This 43\" model is priced at ₹35,000 in our showroom. Final price may vary with offers.', gu:'આ 43\" મોડલની કિંમત શોરૂમમાં ₹35,000 છે. ઓફર પ્રમાણે બદલાઈ શકે છે.' }
+  ];
 
-/* swipe support */
-let startX=null;
-document.getElementById('carousel').addEventListener('touchstart', e => startX = e.changedTouches[0].clientX);
-document.getElementById('carousel').addEventListener('touchend', e => {
-  if(startX===null) return;
-  const dx = e.changedTouches[0].clientX - startX;
-  if(Math.abs(dx) > 40){
-    idx = dx < 0 ? Math.min(idx+1, slidesEl.children.length-1) : Math.max(idx-1, 0);
-    updateSlide();
+  function findAnswer(text){
+    for(const p of PROMPTS) if(p.q.test(text)) return (lang==='en'?p.en:p.gu);
+    return (lang==='en' ? "Sorry — ask about price, dimensions, features, colors, gaming, power or HDR." : "માફ કરશો — કૃપા કરીને કિંમત, માપ, લક્ષણો, રંગો અથવા ગેમિંગ વિશે પૂછો.");
   }
-  startX=null;
-});
 
-/* build dots when images are attached (do small delay to allow loader) */
-setTimeout(()=>{ buildDots(); updateSlide(); }, 300);
+  // send button
+  sendBtn.addEventListener('click', function(){
+    const v = inputBox.value.trim(); if(!v) return; inputBox.value=''; pushMessage(v,'user');
+    const ans = findAnswer(v);
+    setTimeout(()=> pushMessage(ans,'bot'), 240); speak(ans);
+  });
+  inputBox.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); sendBtn.click(); } });
 
-/* features images */
-const featuresEl = document.getElementById('features');
-ASSETS.featureBases.forEach(base=>{
-  const img = document.createElement('img'); img.alt='feature image'; img.loading='lazy';
-  loadFirst([base], img);
-  featuresEl.appendChild(img);
-});
+  // speech synthesis
+  function speak(text){
+    if(!('speechSynthesis' in window)) return;
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = (lang==='en' ? 'en-IN' : 'gu-IN');
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+  }
 
-/* ---------------- language toggle ---------------- */
-let lang = 'en';
-const langEn = document.getElementById('langEn'), langGu = document.getElementById('langGu');
-langEn.addEventListener('click', ()=>{ lang='en'; langEn.classList.add('active'); langGu.classList.remove('active'); document.getElementById('panelSub').textContent='Tap mic or type your question'; });
-langGu.addEventListener('click', ()=>{ lang='gu'; langGu.classList.add('active'); langEn.classList.remove('active'); document.getElementById('panelSub').textContent='માઇક દબાવો અથવા લખો'; });
+  // tap tone
+  let audioCtx = null;
+  function playTap(){
+    try{
+      if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+      const now = audioCtx.currentTime; const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+      o.type='sine'; o.frequency.setValueAtTime(1200, now);
+      g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(0.12, now+0.002); g.gain.exponentialRampToValueAtTime(0.001, now+0.12);
+      o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.12);
+    }catch(e){}
+  }
 
-/* ---------------- chat/voice panel logic ---------------- */
-const panel = document.getElementById('panel');
-const messagesEl = document.getElementById('messages');
-const inputBox = document.getElementById('inputBox');
-const sendBtn = document.getElementById('sendBtn');
-const micBtn = document.getElementById('micBtn');
-function openPanel(){ panel.style.display='flex'; panel.setAttribute('aria-hidden','false'); setTimeout(()=> inputBox.focus(),120); }
-function closePanel(){ panel.style.display='none'; panel.setAttribute('aria-hidden','true'); }
-document.getElementById('openChat').addEventListener('click', openPanel);
-document.getElementById('openVoice').addEventListener('click', ()=>{ openPanel(); setTimeout(()=> micBtn.click(),300); });
-document.getElementById('fabChat').addEventListener('click', openPanel);
-document.getElementById('fabVoice').addEventListener('click', ()=>{ openPanel(); setTimeout(()=> micBtn.click(),300); });
-document.getElementById('closePanel').addEventListener('click', closePanel);
+  // speech recognition (if available)
+  let recognition = null, isListening = false;
+  if(window.SpeechRecognition || window.webkitSpeechRecognition){
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SR();
+    recognition.interimResults = false; recognition.maxAlternatives = 1;
+    recognition.onresult = function(e){
+      const txt = e.results[0][0].transcript;
+      pushMessage(txt,'user');
+      const ans = findAnswer(txt);
+      setTimeout(()=> pushMessage(ans,'bot'), 240);
+      speak(ans);
+    };
+    recognition.onend = function(){ isListening = false; micBtn.textContent = '🎤'; micBtn.style.transform=''; micBtn.style.boxShadow=''; };
+    recognition.onerror = function(){ isListening = false; micBtn.textContent = '🎤'; micBtn.style.transform=''; micBtn.style.boxShadow=''; };
+  }
 
-/* ---------------- message helpers ---------------- */
-function pushMessage(text, who='bot'){
-  const b = document.createElement('div'); b.className = 'bubble ' + (who==='user' ? 'user' : 'bot'); b.textContent = text;
-  messagesEl.appendChild(b); messagesEl.scrollTop = messagesEl.scrollHeight;
-}
+  // mic button in panel
+  micBtn.addEventListener('click', function(){
+    playTap();
+    if(!recognition){ alert(lang==='en' ? 'Speech recognition not supported in this browser.' : 'આ બ્રાઉઝર માં સ્પીચ રેકોગ્નિશન સપોર્ટ નથી.'); return; }
+    if(!isListening){
+      recognition.lang = (lang==='en' ? 'en-IN' : 'gu-IN');
+      try{ recognition.start(); isListening = true; micBtn.textContent = '●'; micBtn.style.transform='scale(1.03)'; micBtn.style.boxShadow='0 8px 28px rgba(255,122,90,0.12)'; }catch(e){ isListening=false; }
+    } else { recognition.stop(); isListening = false; micBtn.textContent = '🎤'; micBtn.style.transform=''; micBtn.style.boxShadow=''; }
+  });
 
-/* ---------------- canned prompts & answers ---------------- */
-const PROMPTS = [
-  { q:/dimension|dimensions|size|height|width|depth/i, en:'See the dimension images below — approx W 83.8 cm × H 60.4 cm × D 18.45 cm (with stand).', gu:'માપ માટેની છબી જુઓ — લગભગ W 83.8 cm × H 60.4 cm × D 18.45 cm (સ્ટૅન્ડ સાથે).' },
-  { q:/feature|features|what .* include|what are the features/i, en:'Key features: 4K UHD, HDR10, Google TV, AiPQ processor, Dolby Audio, HDMI 2.1 (gaming friendly).', gu:'મુખ્ય લક્ષણો: 4K UHD, HDR10, Google TV, AiPQ પ્રોસેસર, Dolby Audio, HDMI 2.1.' },
-  { q:/colour|color|available color/i, en:'Typically available in black/graphite finish; exact options depend on stock.', gu:'સામાન્ય રીતે બ્લેક/ગ્રાફાઇટ રંગમાં ઉપલબ્ધ. સ્ટોક પર આધાર.' },
-  { q:/game|gaming|is it good for game|input lag/i, en:'Yes — HDMI 2.1, Game Mode and ALLM reduce input lag. Native refresh is 60Hz.', gu:'હા — HDMI 2.1 અને ગેમ મોડ ઇનપુટ લેગ ઘટાડે છે. મૂળ રિફ્રેશ 60Hz છે.' },
-  { q:/feedback|review|customer/i, en:'Customers praise the 4K clarity and value; a few note moderate peak brightness.', gu:'ગ્રાહકો 4K ગુણવત્તા અને મૂલ્યને વખાણે છે; કેટલાકે મધ્યમ પીક બ્રાઇટનેસ નોંધ્યો.' },
-  { q:/power|watt|consumption/i, en:'Typical operation ~70–110W; standby <0.5W. Exact depends on model/settings.', gu:'ઉપયોગ સમયે ~70–110W; સ્ટેન્ડબાય <0.5W. મોડેલ પર આધાર.' },
-  { q:/hdr|dolby/i, en:'Supports HDR10; Dolby Audio supported. Dolby Vision is not supported on this model.', gu:'HDR10 સપોર્ટ છે; Dolby Audio ઉપલબ્ધ છે. Dolby Vision નથી.' },
-  { q:/refresh|hz|120hz/i, en:'Native refresh is 60Hz. MEMC provides smoother motion handling.', gu:'મૂળ રિફ્રેશ 60Hz છે. MEMC મોશનને સારી રીતે બતાવે છે.' },
-  { q:/price|cost|how much|₹/rupee/i, en:'This 43\" model is priced at ₹35,000 in our showroom. Final price may vary with offers.', gu:'આ 43\" મોડલની કિંમત શોરૂમમાં ₹35,000 છે. ઓફર પ્રમાણે બદલાઈ શકે છે.' }
-];
+  // FAB clicks
+  document.getElementById('fabChat').addEventListener('click', function(){ playTap(); openPanel(); });
+  document.getElementById('fabVoice').addEventListener('click', function(){ playTap(); openPanel(); setTimeout(()=> micBtn.click(), 220); });
 
-function answerFor(text){
-  for(const p of PROMPTS) if(p.q.test(text)) return (lang==='en'?p.en:p.gu);
-  return (lang==='en' ? "Sorry — ask about price, dimensions, features, colors, gaming, power or HDR." : "માફ કરશો — કૃપા કરીને કિંમત, માપ, લક્ષણો, રંગો, ગેમિંગ અથવા વીજ ખર્ચ વિશે પૂછો.");
-}
+  // quick sample buttons
+  ['Features','Dimensions','Colors','Gaming','Price'].forEach(function(label){
+    const b = document.createElement('button'); b.className = 'btn secondary'; b.textContent = label;
+    b.addEventListener('click', function(){ pushMessage(label,'user'); const ans = findAnswer(label); setTimeout(()=> pushMessage(ans,'bot'),200); speak(ans); });
+    document.getElementById('controls').appendChild(b);
+  });
 
-/* ---------------- chat input handlers ---------------- */
-sendBtn.addEventListener('click', ()=>{
-  const v = inputBox.value.trim(); if(!v) return; inputBox.value=''; pushMessage(v,'user'); const ans = answerFor(v); setTimeout(()=> pushMessage(ans,'bot'),200); speak(ans);
-});
-inputBox.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); sendBtn.click(); } });
+  // initial greeting
+  setTimeout(()=> pushMessage(lang==='en' ? 'Hello — tap mic or type a question about price, features, dimensions, colours or gaming.' : 'હેલો — માઈક દબાવો અથવા લખીને પ્રશ્ન પૂછો.'), 600);
 
-/* ---------------- speech synthesis ---------------- */
-function speak(text){
-  if(!('speechSynthesis' in window)) return;
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = (lang==='en' ? 'en-IN' : 'gu-IN');
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(u);
-}
+  // ensure interactive elements have proper touch behavior (helps in some browsers)
+  ['prevBtn','nextBtn','fabChat','fabVoice','openChat','openVoice','langEn','langGu','micBtn','sendBtn'].forEach(function(id){
+    const el = document.getElementById(id);
+    if(el) el.style.touchAction = 'manipulation';
+  });
 
-/* ---------------- tap tone ---------------- */
-let audioCtx = null;
-function playTap(){ try{ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); const now = audioCtx.currentTime; const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.type='sine'; o.frequency.setValueAtTime(1200,now); g.gain.setValueAtTime(0,now); g.gain.linearRampToValueAtTime(0.12,now+0.002); g.gain.exponentialRampToValueAtTime(0.001,now+0.12); o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.12);}catch(e){} }
-
-/* ---------------- recognition (if supported) ---------------- */
-let recognition = null, listening=false;
-if(window.SpeechRecognition || window.webkitSpeechRecognition){
-  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.interimResults = false; recognition.maxAlternatives = 1;
-  recognition.onresult = (e)=>{ const txt = e.results[0][0].transcript; pushMessage(txt,'user'); const ans = answerFor(txt); setTimeout(()=> pushMessage(ans,'bot'),200); speak(ans); };
-  recognition.onend = ()=>{ listening=false; micBtn.textContent='🎤'; micBtn.style.transform=''; micBtn.style.boxShadow=''; };
-  recognition.onerror = ()=>{ listening=false; micBtn.textContent='🎤'; micBtn.style.transform=''; micBtn.style.boxShadow=''; };
-}
-
-/* mic button action */
-micBtn.addEventListener('click', ()=>{
-  playTap();
-  if(!recognition){ alert(lang==='en' ? 'Speech recognition not supported in this browser.' : 'આ બ્રાઉઝર માં સ્પીચ રેકોગ્નિશન સપોર્ટ નથી.'); return; }
-  if(!listening){
-    recognition.lang = (lang==='en' ? 'en-IN' : 'gu-IN');
-    recognition.start(); listening=true; micBtn.textContent='●'; micBtn.style.transform='scale(1.03)'; micBtn.style.boxShadow='0 8px 28px rgba(255,122,90,0.12)';
-  } else { recognition.stop(); listening=false; micBtn.textContent='🎤'; micBtn.style.transform=''; micBtn.style.boxShadow=''; }
-});
-
-/* fab handlers */
-document.getElementById('fabChat').addEventListener('click', ()=>{ playTap(); openPanel(); });
-document.getElementById('fabVoice').addEventListener('click', ()=>{ playTap(); openPanel(); setTimeout(()=> micBtn.click(),250); });
-
-/* quick sample buttons (controls area) */
-['Features','Dimensions','Colors','Gaming','Price'].forEach(label=>{
-  const b = document.createElement('button'); b.className='btn secondary'; b.textContent = label;
-  b.addEventListener('click', ()=> { pushMessage(label,'user'); const ans = answerFor(label); setTimeout(()=> pushMessage(ans,'bot'),200); speak(ans); });
-  document.getElementById('controls').appendChild(b);
-});
-
-/* greeting */
-setTimeout(()=> pushMessage(lang==='en' ? 'Hello — tap mic or type a question about price, features, dimensions, colors or gaming.' : 'હેલો — માઈક દબાવો અથવા લખીને પ્રશ્ન પૂછો.'), 500);
-
-/* small accessibility: ensure buttons are tappable */
-['prevBtn','nextBtn','fabChat','fabVoice','openChat','openVoice','langEn','langGu','micBtn','sendBtn'].forEach(id=>{
-  const el = document.getElementById(id);
-  if(el) el.style.touchAction = 'manipulation';
-});
+}); // DOMContentLoaded
 </script>
 </body>
 </html>
